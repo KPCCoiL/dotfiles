@@ -1,0 +1,260 @@
+"          _____                         
+"   ___   ____(_)______ _________________
+"   __ | / /_  /__  __ `__ \_  ___/  ___/
+"_____ |/ /_  / _  / / / / /  /   / /__  
+"_(_)____/ /_/  /_/ /_/ /_//_/    \___/  
+                                        
+" Vim-LaTeX
+filetype plugin on
+filetype indent on
+set shellslash
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Imap_UsePlaceHolders = 1
+let g:Imap_DeleteEmptyPlaceHolders = 1
+let g:Imap_StickyPlaceHolders = 0
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_FormatDependency_ps = 'dvi,ps'
+let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
+let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
+let g:Tex_UseEditorSettingInDVIViewer = 1
+let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
+let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
+let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+"
+"normal setting
+set number
+hi WarningMsg guifg=bg
+set incsearch
+set autoread
+set backup
+set backupdir=$HOME/.vim-backup
+"
+"keymaps
+inoremap () ()<++><Left><Left><Left><Left><Left>
+inoremap {} {}<++><Left><Left><Left><Left><Left>
+inoremap [] []<++><Left><Left><Left><Left><Left>
+inoremap "" ""<++><Left><Left><Left><Left><Left>
+inoremap <> <><++><Left><Left><Left><Left><Left>
+inoremap '' ''<++><Left><Left><Left><Left><Left>
+nnoremap ; :
+vnoremap ; :
+nnoremap : ;
+vnoremap : ;
+nmap j gj
+nmap k gk
+nmap Y y$
+nnoremap <Leader>rr :<C-u>SCCompileRun<CR>
+imap <D-i> <Return><A-i>
+command! -nargs=0 Zenhan call s:zenhan()
+function! s:zenhan()
+	%s/、/,/g
+	%s/。/./g
+endfunction
+command! -nargs=0 -range=% Count :<line1>,<line2>s/./&/gn | :noh
+command! -nargs=0 Delhl /aaaaaaaaa
+augroup xxd
+	autocmd!
+	autocmd BufReadPost * if &l:binary | setlocal filetype=xxd |endif
+augroup END
+"setting for Neobundle
+set nocompatible               " be iMproved
+filetype off
+
+"Plugins
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim
+    call neobundle#rc(expand('~/.vim/bundle/'))
+    endif
+    " originalrepos on github
+    NeoBundle 'Shougo/neobundle.vim'
+    NeoBundle 'Shougo/vimproc',{
+			    \'build' :{
+    				\'mac':'make -f make_mac.mak',
+    				\'unix':'make -f make_unix.mak',
+				\},
+				\}
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'VimClojure'
+    NeoBundle 'Shougo/vimshell'
+    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neosnippet'
+    NeoBundle 'Shougo/vimfiler'
+    NeoBundle 'xuhdev/SingleCompile'
+    NeoBundleLazy 'hail2u/h2u_colorscheme',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundle 'cocopon/colorswatch.vim'
+    NeoBundleLazy 'thinca/vim-scouter',{
+    	\"autoload" : {"commands" : ["Scouter"]}}
+    NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'cohama/vim-hier'
+    NeoBundleLazy 'dag/vim2hs',{
+    	\"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundleLazy 'eagletmt/ghcmod-vim',{
+    	\"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundleLazy 'pbrisbin/html-template-syntax',{
+    	\"autoload" : {"filetypes" : ["html"]}}
+    NeoBundleLazy 'eagletmt/neco-ghc',{
+    	\"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundle 'kana/vim-smartchr'
+    NeoBundle 'vim-scripts/DrawIt'
+    NeoBundle 'vim-scripts/VimCoder.jar'
+    NeoBundle 'thinca/vim-template'
+    NeoBundle 'basyura/TweetVim'
+    NeoBundle 'mattn/webapi-vim'
+    NeoBundle 'tyru/open-browser.vim'
+    NeoBundle 'basyura/twibill.vim'
+    NeoBundle 'h1mesuke/unite-outline'
+    NeoBundle 'KPCCoiL/neosnippet-snippets'
+    NeoBundle 'yuratomo/w3m.vim'
+    NeoBundle 'Shougo/neomru.vim'
+    NeoBundle 'modsound/macdict-vim'
+    NeoBundle 'mattn/excelview-vim'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'rbtnn/vimconsole.vim'
+
+    filetype plugin indent on     " required!
+    filetype indent on
+    syntax on
+
+"Setting for Neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+vmap <expr><Tab> neosnippet#expandable() ? "\<Plug>(neosnippet_jump_or_expand)" : "\<Tab>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y> neocomplete#close_popup()
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-b>     neocomplete#complete_common_string()
+
+"calc for Vim
+function! s:Calc(expression)
+	!awk "BEGIN{print ".a:expression."}";
+endfunction
+command! -nargs=* Calc call s:Calc(<f-args>)
+
+"syntaxinfo
+function! s:get_syn_id(transparent)
+  let synid = synID(line("."), col("."), 1)
+  if a:transparent
+    return synIDtrans(synid)
+  else
+    return synid
+  endif
+endfunction
+function! s:get_syn_attr(synid)
+  let name = synIDattr(a:synid, "name")
+  let ctermfg = synIDattr(a:synid, "fg", "cterm")
+  let ctermbg = synIDattr(a:synid, "bg", "cterm")
+  let guifg = synIDattr(a:synid, "fg", "gui")
+  let guibg = synIDattr(a:synid, "bg", "gui")
+  return {
+        \ "name": name,
+        \ "ctermfg": ctermfg,
+        \ "ctermbg": ctermbg,
+        \ "guifg": guifg,
+        \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+  echo "name: " . baseSyn.name .
+        \ " ctermfg: " . baseSyn.ctermfg .
+        \ " ctermbg: " . baseSyn.ctermbg .
+        \ " guifg: " . baseSyn.guifg .
+        \ " guibg: " . baseSyn.guibg
+  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+  echo "link to"
+  echo "name: " . linkedSyn.name .
+        \ " ctermfg: " . linkedSyn.ctermfg .
+        \ " ctermbg: " . linkedSyn.ctermbg .
+        \ " guifg: " . linkedSyn.guifg .
+        \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()
+
+set background=dark
+so ~/lineconfig.vim
+"Setting for Unite
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
+nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
+nnoremap <silent> ,uc :<C-u>Unite colorscheme -auto-preview<CR>
+nnoremap <silent> ,uo :<C-u>Unite output<CR>
+
+"reload vimrc & gvimrc
+function! s:Rercs()
+	source ~/.vimrc
+	source ~/.gvimrc
+endfunction
+command! Reloadvimrc call s:Rercs()
+
+"colorschemes
+NeoBundleLazy 'nanotech/jellybeans.vim',{
+    	\"autoload" : {"commands" :["Unite colorscheme -auto-preview"]}}
+NeoBundleLazy 'w0ng/vim-hybrid',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundleLazy 'tomasr/molokai',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundleLazy 'vim-scripts/rdark',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundleLazy 'jpo/vim-railscasts-theme',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundleLazy 'itchyny/landscape.vim',{
+    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+
+"Unite sources
+NeoBundle 'ujihisa/unite-colorscheme'
+"C++11
+let common_run_command = './$(FILE_TITLE)$'
+call SingleCompile#SetCompilerTemplate(
+    \ 'cpp', 'g++ 11', 
+    \ 'GNU C++ Compiler',
+    \'g++', '-I/usr/local/Cellar/boost/1.55.0/include -std=c++11 -g -o $(FILE_TITLE)$', 
+    \common_run_command)
+let emrun = 'd8 $(FILE_TITLE)$.js'
+call SingleCompile#SetCompilerTemplate(
+    \ 'cpp', 'em++', 
+    \ 'enscripten Compiler', '~/emscripten/em++', '-O3 --closure 1 -o $(FILE_TITLE)$.js', 
+    \emrun)
+call SingleCompile#ChooseCompiler('cpp','g++ 11')
+
+"vim-smartchr
+augroup chars
+	autocmd!
+	autocmd FileType c,cpp,ruby,python,sh inoremap <buffer> <expr> = smartchr#loop(' = ',' == ','=',' = <++><Left><Left><Left><Left><Left><Left>')
+	autocmd FileType haskell inoremap <buffer> <expr> - smartchr#loop(' - ','-- ',' -> ',' <- ','-')
+	autocmd FileType haskell inoremap <buffer> <expr> = smartchr#loop(' = ',' == ')
+augroup END
+
+
+"setting for VimShell
+let g:vimshell_prompt_expr = 'getcwd()." > "'
+let g:vimshell_prompt_pattern='^\f\+ > '
+let g:vimshell_secondary_prompt = "> "
+nnoremap ,vp :<C-u>VimShellPop<CR>
+nnoremap ,vt :<C-u>VimShellTab<CR>
+nnoremap ,vs :<C-u>VimShell<CR>
+let g:vimfiler_as_default_explorer=1
+
+"auto new dir
+augroup vimrc-auto-mkdir  " {{{
+  autocmd!
+  autocmd BufWritePre * call s:auto_mkdir(expand('<afile>:p:h'))
+  function! s:auto_mkdir(dir)  " {{{
+    if !isdirectory(a:dir)
+      call mkdir(iconv(a:dir, &encoding, &termencoding), 'p')
+    endif
+  endfunction  " }}}
+augroup END  " }}}
+so $VIMRUNTIME/macros/matchit.vim
+
+"Tweetvim
+nnoremap ,tw :<C-u>TweetVimCommandSay<CR>
+command! HomeTwitter :TweetVimHomeTime
