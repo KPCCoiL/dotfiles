@@ -16,15 +16,28 @@ let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
 let g:Tex_FormatDependency_pdf = 'dvi,pdf'
-let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
-let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
-let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
-let g:Tex_UseEditorSettingInDVIViewer = 1
-let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
-let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
-let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+
+"Setting of each environment
+if has('mac')
+	imap <D-i> <Return><A-i>
+	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
+	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
+	let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
+	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
+	let g:Tex_UseEditorSettingInDVIViewer = 1
+	let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
+	let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
+	let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+elseif has('unix')
+	let g:Tex_CompileRule_pdf = 'ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+	let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
+	let g:Tex_CompileRule_dvi = 'uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+	let g:Tex_BibtexFlavor = 'upbibtex'
+	let g:Tex_MakeIndexFlavor = 'makeindex $*.idx'
+	let g:Tex_UseEditorSettingInDVIViewer = 1
+	let g:Tex_ViewRule_pdf = 'epdfview'
+endif
 "
 "normal setting
 set number
@@ -33,6 +46,7 @@ set incsearch
 set autoread
 set backup
 set backupdir=$HOME/.vim-backup
+set background=dark
 "
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
@@ -41,6 +55,7 @@ inoremap [] []<++><Left><Left><Left><Left><Left>
 inoremap "" ""<++><Left><Left><Left><Left><Left>
 inoremap <> <><++><Left><Left><Left><Left><Left>
 inoremap '' ''<++><Left><Left><Left><Left><Left>
+inoremap `` ``<++><Left><Left><Left><Left><Left>
 nnoremap ; :
 vnoremap ; :
 nnoremap : ;
@@ -49,7 +64,6 @@ nmap j gj
 nmap k gk
 nmap Y y$
 nnoremap <Leader>rr :<C-u>SCCompileRun<CR>
-imap <D-i> <Return><A-i>
 command! -nargs=0 Zenhan call s:zenhan()
 function! s:zenhan()
 	%s/、/,/g
@@ -81,7 +95,11 @@ if has('vim_starting')
     NeoBundle 'Shougo/unite.vim'
     NeoBundle 'VimClojure'
     NeoBundle 'Shougo/vimshell'
-    NeoBundle 'Shougo/neocomplete.vim'
+    if has('mac')
+	    NeoBundle 'Shougo/neocomplete.vim'
+    else
+	    NeoBundle 'Shougo/neocomplcache.vim'
+    endif
     NeoBundle 'Shougo/neosnippet'
     NeoBundle 'Shougo/vimfiler'
     NeoBundle 'xuhdev/SingleCompile'
@@ -132,9 +150,9 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-b>     neocomplete#complete_common_string()
 
-"calc for Vim
+"awk calc
 function! s:Calc(expression)
-	!awk "BEGIN{print ".a:expression."}";
+	execute "!awk \"BEGIN{print ".a:expression."}\""
 endfunction
 command! -nargs=* Calc call s:Calc(<f-args>)
 
@@ -177,8 +195,7 @@ function! s:get_syn_info()
 endfunction
 command! SyntaxInfo call s:get_syn_info()
 
-set background=dark
-so ~/lineconfig.vim
+
 "Setting for Unite
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
@@ -208,6 +225,7 @@ NeoBundleLazy 'jpo/vim-railscasts-theme',{
     	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
 NeoBundleLazy 'itchyny/landscape.vim',{
     	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundleCheck
 
 "Unite sources
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -216,7 +234,7 @@ let common_run_command = './$(FILE_TITLE)$'
 call SingleCompile#SetCompilerTemplate(
     \ 'cpp', 'g++ 11', 
     \ 'GNU C++ Compiler',
-    \'g++', '-I/usr/local/Cellar/boost/1.55.0/include -std=c++11 -g -o $(FILE_TITLE)$', 
+    \'g++', '-std=c++11 -g -o $(FILE_TITLE)$', 
     \common_run_command)
 let emrun = 'd8 $(FILE_TITLE)$.js'
 call SingleCompile#SetCompilerTemplate(
@@ -241,6 +259,8 @@ let g:vimshell_secondary_prompt = "> "
 nnoremap ,vp :<C-u>VimShellPop<CR>
 nnoremap ,vt :<C-u>VimShellTab<CR>
 nnoremap ,vs :<C-u>VimShell<CR>
+
+"Setting for VimFiler
 let g:vimfiler_as_default_explorer=1
 
 "auto new dir
@@ -258,3 +278,64 @@ so $VIMRUNTIME/macros/matchit.vim
 "Tweetvim
 nnoremap ,tw :<C-u>TweetVimCommandSay<CR>
 command! HomeTwitter :TweetVimHomeTime
+
+"setting for lightline
+let g:lightline = {
+			\ 'colorscheme': (has('gui_running')?'solarized': 'default'),
+			\ 'mode_map': {'c': 'NORMAL'},
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+			\ },
+			\ 'component_function': {
+			\   'modified': 'MyModified',
+			\   'readonly': 'MyReadonly',
+			\   'fugitive': 'MyFugitive',
+			\   'filename': 'MyFilename',
+			\   'fileformat': 'MyFileformat',
+			\   'filetype': 'MyFiletype',
+			\   'fileencoding': 'MyFileencoding',
+			\   'mode': 'MyMode'
+			\ }
+			\ }
+function! MyModified()
+	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! MyFilename()
+	return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+				\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+				\  &ft == 'unite' ? unite#get_status_string() :
+				\  &ft == 'vimshell' ? vimshell#get_status_string() :
+				\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+				\ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+	try
+		if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+			return fugitive#head()
+		endif
+	catch
+	endtry
+	return ''
+endfunction
+
+function! MyFileformat()
+	return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+	return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+	return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
