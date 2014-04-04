@@ -47,7 +47,7 @@ set autoread
 set backup
 set backupdir=$HOME/.vim-backup
 set background=dark
-"
+
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
 inoremap {} {}<++><Left><Left><Left><Left><Left>
@@ -60,21 +60,75 @@ nnoremap ; :
 vnoremap ; :
 nnoremap : ;
 vnoremap : ;
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 nmap j gj
 nmap k gk
 nmap Y y$
 nnoremap <Leader>rr :<C-u>SCCompileRun<CR>
+
+"useful commands
+"、。->,.
 command! -nargs=0 Zenhan call s:zenhan()
 function! s:zenhan()
 	%s/、/,/g
 	%s/。/./g
 endfunction
+"count chars
 command! -nargs=0 -range=% Count :<line1>,<line2>s/./&/gn | :noh
+"delete hlsearch
 command! -nargs=0 Delhl /aaaaaaaaa
+"awk calc
+function! s:Calc(expression)
+	execute "!awk \"BEGIN{print ".a:expression."}\""
+endfunction
+command! -nargs=* Calc call s:Calc(<f-args>)
+"syntaxinfo
+function! s:get_syn_id(transparent)
+  let synid = synID(line("."), col("."), 1)
+  if a:transparent
+    return synIDtrans(synid)
+  else
+    return synid
+  endif
+endfunction
+function! s:get_syn_attr(synid)
+  let name = synIDattr(a:synid, "name")
+  let ctermfg = synIDattr(a:synid, "fg", "cterm")
+  let ctermbg = synIDattr(a:synid, "bg", "cterm")
+  let guifg = synIDattr(a:synid, "fg", "gui")
+  let guibg = synIDattr(a:synid, "bg", "gui")
+  return {
+        \ "name": name,
+        \ "ctermfg": ctermfg,
+        \ "ctermbg": ctermbg,
+        \ "guifg": guifg,
+        \ "guibg": guibg}
+endfunction
+function! s:get_syn_info()
+  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
+  echo "name: " . baseSyn.name .
+        \ " ctermfg: " . baseSyn.ctermfg .
+        \ " ctermbg: " . baseSyn.ctermbg .
+        \ " guifg: " . baseSyn.guifg .
+        \ " guibg: " . baseSyn.guibg
+  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
+  echo "link to"
+  echo "name: " . linkedSyn.name .
+        \ " ctermfg: " . linkedSyn.ctermfg .
+        \ " ctermbg: " . linkedSyn.ctermbg .
+        \ " guifg: " . linkedSyn.guifg .
+        \ " guibg: " . linkedSyn.guibg
+endfunction
+command! SyntaxInfo call s:get_syn_info()
+"binary file
 augroup xxd
 	autocmd!
 	autocmd BufReadPost * if &l:binary | setlocal filetype=xxd |endif
 augroup END
+
 "setting for Neobundle
 set nocompatible               " be iMproved
 filetype off
@@ -95,7 +149,7 @@ if has('vim_starting')
     NeoBundle 'Shougo/unite.vim'
     NeoBundle 'VimClojure'
     NeoBundle 'Shougo/vimshell'
-    if has('mac')
+    if has('lua')
 	    NeoBundle 'Shougo/neocomplete.vim'
     else
 	    NeoBundle 'Shougo/neocomplcache.vim'
@@ -150,52 +204,6 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-b>     neocomplete#complete_common_string()
 
-"awk calc
-function! s:Calc(expression)
-	execute "!awk \"BEGIN{print ".a:expression."}\""
-endfunction
-command! -nargs=* Calc call s:Calc(<f-args>)
-
-"syntaxinfo
-function! s:get_syn_id(transparent)
-  let synid = synID(line("."), col("."), 1)
-  if a:transparent
-    return synIDtrans(synid)
-  else
-    return synid
-  endif
-endfunction
-function! s:get_syn_attr(synid)
-  let name = synIDattr(a:synid, "name")
-  let ctermfg = synIDattr(a:synid, "fg", "cterm")
-  let ctermbg = synIDattr(a:synid, "bg", "cterm")
-  let guifg = synIDattr(a:synid, "fg", "gui")
-  let guibg = synIDattr(a:synid, "bg", "gui")
-  return {
-        \ "name": name,
-        \ "ctermfg": ctermfg,
-        \ "ctermbg": ctermbg,
-        \ "guifg": guifg,
-        \ "guibg": guibg}
-endfunction
-function! s:get_syn_info()
-  let baseSyn = s:get_syn_attr(s:get_syn_id(0))
-  echo "name: " . baseSyn.name .
-        \ " ctermfg: " . baseSyn.ctermfg .
-        \ " ctermbg: " . baseSyn.ctermbg .
-        \ " guifg: " . baseSyn.guifg .
-        \ " guibg: " . baseSyn.guibg
-  let linkedSyn = s:get_syn_attr(s:get_syn_id(1))
-  echo "link to"
-  echo "name: " . linkedSyn.name .
-        \ " ctermfg: " . linkedSyn.ctermfg .
-        \ " ctermbg: " . linkedSyn.ctermbg .
-        \ " guifg: " . linkedSyn.guifg .
-        \ " guibg: " . linkedSyn.guibg
-endfunction
-command! SyntaxInfo call s:get_syn_info()
-
-
 "Setting for Unite
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
@@ -229,7 +237,8 @@ NeoBundleCheck
 
 "Unite sources
 NeoBundle 'ujihisa/unite-colorscheme'
-"C++11
+
+"SingleCompile
 let common_run_command = './$(FILE_TITLE)$'
 call SingleCompile#SetCompilerTemplate(
     \ 'cpp', 'g++ 11', 
