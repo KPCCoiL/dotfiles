@@ -123,6 +123,12 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+"reload vimrc & gvimrc
+function! s:Rercs()
+	source ~/.vimrc
+	source ~/.gvimrc
+endfunction
+command! Reloadvimrc call s:Rercs()
 "binary file
 augroup xxd
 	autocmd!
@@ -213,13 +219,6 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <silent> ,uc :<C-u>Unite colorscheme -auto-preview<CR>
 nnoremap <silent> ,uo :<C-u>Unite output<CR>
 
-"reload vimrc & gvimrc
-function! s:Rercs()
-	source ~/.vimrc
-	source ~/.gvimrc
-endfunction
-command! Reloadvimrc call s:Rercs()
-
 "colorschemes
 NeoBundleLazy 'nanotech/jellybeans.vim',{
     	\"autoload" : {"commands" :["Unite colorscheme -auto-preview"]}}
@@ -256,10 +255,9 @@ call SingleCompile#ChooseCompiler('cpp','g++ 11')
 augroup chars
 	autocmd!
 	autocmd FileType c,cpp,ruby,python,sh inoremap <buffer> <expr> = smartchr#loop(' = ',' == ','=',' = <++><Left><Left><Left><Left><Left><Left>')
-	autocmd FileType haskell inoremap <buffer> <expr> - smartchr#loop(' - ','-- ',' -> ',' <- ','-')
-	autocmd FileType haskell inoremap <buffer> <expr> = smartchr#loop(' = ',' == ')
+	autocmd FileType haskell inoremap <buffer> <expr> - smartchr#loop('-','-- ',' -> ',' <- ')
+	autocmd FileType haskell inoremap <buffer> <expr> = smartchr#loop(' = ',' == ',' = <++><Left><Left><Left><Left><Left><Left>')
 augroup END
-
 
 "setting for VimShell
 let g:vimshell_prompt_expr = 'getcwd()." > "'
@@ -282,6 +280,8 @@ augroup vimrc-auto-mkdir  " {{{
     endif
   endfunction  " }}}
 augroup END  " }}}
+
+"enable matchit.vim
 so $VIMRUNTIME/macros/matchit.vim
 
 "Tweetvim
