@@ -50,3 +50,6 @@ endif
 "
 "normal settings
 set visualbell t_vb=
+if !has(mac)
+	set mouse=
+endif

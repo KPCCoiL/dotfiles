@@ -186,11 +186,12 @@ if has('vim_starting')
     NeoBundle 'mattn/webapi-vim'
     NeoBundle 'tyru/open-browser.vim'
     NeoBundle 'basyura/twibill.vim'
-    NeoBundle 'h1mesuke/unite-outline'
     NeoBundle 'KPCCoiL/neosnippet-snippets'
     NeoBundle 'yuratomo/w3m.vim'
     NeoBundle 'Shougo/neomru.vim'
-    NeoBundle 'modsound/macdict-vim'
+    if has('mac')
+	    NeoBundle 'modsound/macdict-vim'
+    endif
     NeoBundle 'mattn/excelview-vim'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'rbtnn/vimconsole.vim'
@@ -236,6 +237,7 @@ NeoBundleCheck
 
 "Unite sources
 NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'h1mesuke/unite-outline'
 
 "SingleCompile
 let common_run_command = './$(FILE_TITLE)$'
@@ -256,7 +258,9 @@ augroup chars
 	autocmd!
 	autocmd FileType c,cpp,ruby,python,sh inoremap <buffer> <expr> = smartchr#loop(' = ',' == ','=',' = <++><Left><Left><Left><Left><Left><Left>')
 	autocmd FileType haskell inoremap <buffer> <expr> - smartchr#loop('-','-- ',' -> ',' <- ')
-	autocmd FileType haskell inoremap <buffer> <expr> = smartchr#loop(' = ',' == ',' = <++><Left><Left><Left><Left><Left><Left>')
+	autocmd FileType haskell inoremap <buffer> <expr> = smartchr#loop(' = ',' == ','=',' = <++><Left><Left><Left><Left><Left><Left>')
+	autocmd FileType haskell inoremap <buffer> <expr> > smartchr#loop('>',' >> ',' >>= ',' > ')
+	autocmd FileType haskell inoremap <buffer> <expr> < smartchr#loop('<',' =<< ',' < ')
 augroup END
 
 "setting for VimShell
