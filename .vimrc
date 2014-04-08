@@ -238,6 +238,11 @@ NeoBundleCheck
 "Unite sources
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'tsukkee/unite-help'
+if has('mac')
+	NeoBundle 'choplin/unite-spotlight'
+endif
 
 "SingleCompile
 let common_run_command = './$(FILE_TITLE)$'
