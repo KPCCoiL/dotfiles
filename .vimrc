@@ -219,6 +219,9 @@ nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <silent> ,uc :<C-u>Unite colorscheme -auto-preview<CR>
 nnoremap <silent> ,uo :<C-u>Unite output<CR>
+nnoremap <silent> ,ul :<C-u>Unite outline<CR>
+nnoremap <silent> ,uq :<C-u>Unite -no-quit -direction=botright quickfix<CR>
+nnoremap <silent> ,uh :<C-u>Unite help<CR>
 
 "colorschemes
 NeoBundleLazy 'nanotech/jellybeans.vim',{
@@ -242,6 +245,7 @@ NeoBundle 'osyo-manga/unite-quickfix'
 NeoBundle 'tsukkee/unite-help'
 if has('mac')
 	NeoBundle 'choplin/unite-spotlight'
+	nnoremap ,us :<C-u>Unite spotlight
 endif
 
 "SingleCompile
@@ -278,6 +282,7 @@ nnoremap ,vs :<C-u>VimShell<CR>
 
 "Setting for VimFiler
 let g:vimfiler_as_default_explorer=1
+nnoremap ,vf :<C-u>VimFiler
 
 "auto new dir
 augroup vimrc-auto-mkdir  " {{{
