@@ -129,6 +129,24 @@ function! s:Rercs()
 	source ~/.gvimrc
 endfunction
 command! Reloadvimrc call s:Rercs()
+function! s:cliprun()
+	if &filetype=='haskell'
+		if glob(expand('%:r')) != ''
+			let s:runcmd='./'
+		else
+			let s:runcmd='runhaskell '
+		endif
+	elseif &filetype=='cpp'
+		let s:runcmd='./'
+	endif
+	if has('mac')
+		let s:clipcmd='pbpaste'
+	elseif has('unix')
+		let s:clipcmd='xsel -bo'
+	endif
+	execute '!'.s:clipcmd.'|'.s:runcmd.expand('%:r')
+endfunction
+command! ClipRun call s:cliprun()
 "binary file
 augroup xxd
 	autocmd!
