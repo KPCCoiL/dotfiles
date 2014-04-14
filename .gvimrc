@@ -1,3 +1,11 @@
+"                                                                      
+"                              _/                                      
+"         _/_/_/  _/      _/      _/_/_/  _/_/    _/  _/_/    _/_/_/   
+"      _/    _/  _/      _/  _/  _/    _/    _/  _/_/      _/          
+"     _/    _/    _/  _/    _/  _/    _/    _/  _/        _/           
+"_/    _/_/_/      _/      _/  _/    _/    _/  _/          _/_/_/      
+"         _/                                                           
+"    _/_/                                                              
 "setting for colorscheme
 syntax enable
 colorscheme solarized
@@ -50,6 +58,6 @@ endif
 "
 "normal settings
 set visualbell t_vb=
-if !has(mac)
+if !has('mac')
 	set mouse=
 endif

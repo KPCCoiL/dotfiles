@@ -100,8 +100,11 @@ export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46
 alias ls="ls -G"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_.]=**'
 export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include
+setopt auto_cd
+setopt nolistbeep
+setopt auto_pushd
+setopt list_packed
 #commands
-
 # --------------------------------------
 # Google search from terminal
 # --------------------------------------
@@ -128,7 +131,7 @@ google(){
 runcpp(){
 	local path="${*// /+}"
 	g++ ${path} -std=c++11 -o ${path}.out
-	${path}.out
+	./${path}.out
 }
 alias emacs='vim'
 alias reload='source ~/.zshrc'
