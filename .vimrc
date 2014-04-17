@@ -207,9 +207,29 @@ if has('vim_starting')
     NeoBundle 'KPCCoiL/neosnippet-snippets'
     NeoBundle 'yuratomo/w3m.vim'
     NeoBundle 'Shougo/neomru.vim'
+    NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
+    if neobundle#tap('jazzradio.vim')
+	    call neobundle#config({
+				    \   'autoload' : {
+				    \     'unite_sources' : [
+				    \       'jazzradio'
+				    \     ],
+				    \     'commands' : [
+				    \       'JazzradioUpdateChannels',
+				    \       'JazzradioStop',
+				    \       {
+				    \         'name' : 'JazzradioPlay',
+				    \         'complete' : 'customlist,jazzradio#channel_id_complete'
+				    \       }
+				    \     ],
+				    \     'function_prefix' : 'jazzradio'
+				    \   }
+				    \ })
+    endif
     if has('mac')
 	    NeoBundle 'modsound/macdict-vim'
     endif
+    NeoBundle 'tpope/vim-fugitive'
     NeoBundle 'mattn/excelview-vim'
     NeoBundle 'tpope/vim-surround'
     NeoBundle 'rbtnn/vimconsole.vim'
