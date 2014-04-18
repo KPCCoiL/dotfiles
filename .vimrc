@@ -157,13 +157,13 @@ command! ClipRun call s:cliprun()
 function! s:ask_progress()
 	let s:progress=input("進捗どうですか? (good/bad) : ")
 	if s:progress=="good"
-		let s:shinchoku='良いです'
+		let s:shinchoku='大丈夫です'
 	elseif s:progress=="bad"
 		let s:shinchoku='ダメです'
 	else
 		echoerr "Invalid progress"
 	endif
-	TweetVimCommandSay "進捗" . s:shinchoku
+	execute "TweetVimCommandSay 進捗" . s:shinchoku
 endfunction
 command! Shinchoku call s:ask_progress()
 "binary file
