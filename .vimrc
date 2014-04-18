@@ -44,9 +44,13 @@ set number
 hi WarningMsg guifg=bg
 set incsearch
 set autoread
+set undofile
+set undodir=$HOME/.vim-undo
 set backup
 set backupdir=$HOME/.vim-backup
 set background=dark
+set nrformats-=octal
+set nrformats+=alpha
 
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
@@ -56,10 +60,12 @@ inoremap "" ""<++><Left><Left><Left><Left><Left>
 inoremap <> <><++><Left><Left><Left><Left><Left>
 inoremap '' ''<++><Left><Left><Left><Left><Left>
 inoremap `` ``<++><Left><Left><Left><Left><Left>
-nnoremap ; :
-vnoremap ; :
-nnoremap : ;
-vnoremap : ;
+if has('mac')
+	nnoremap ; :
+	vnoremap ; :
+	nnoremap : ;
+	vnoremap : ;
+endif
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
@@ -69,7 +75,7 @@ nmap k gk
 nmap Y y$
 nnoremap <Leader>rr :<C-u>SCCompileRun<CR>
 
-"useful commands
+"some commands
 "、。->,.
 command! -nargs=0 Zenhan call s:zenhan()
 function! s:zenhan()
@@ -147,6 +153,19 @@ function! s:cliprun()
 	execute '!'.s:clipcmd.'|'.s:runcmd.expand('%:r')
 endfunction
 command! ClipRun call s:cliprun()
+"tweet progress
+function! s:ask_progress()
+	let s:progress=input("進捗どうですか? (good/bad) : ")
+	if s:progress=="good"
+		let s:shinchoku='良いです'
+	elseif s:progress=="bad"
+		let s:shinchoku='ダメです'
+	else
+		echoerr "Invalid progress"
+	endif
+	TweetVimCommandSay "進捗" . s:shinchoku
+endfunction
+command! Shinchoku call s:ask_progress()
 "binary file
 augroup xxd
 	autocmd!
@@ -258,8 +277,9 @@ nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <silent> ,uc :<C-u>Unite colorscheme -auto-preview<CR>
 nnoremap <silent> ,uo :<C-u>Unite output<CR>
 nnoremap <silent> ,ul :<C-u>Unite outline<CR>
-nnoremap <silent> ,uq :<C-u>Unite -no-quit -direction=botright quickfix<CR>
+nnoremap <silent> ,uq :<C-u>Unite -no-quit -direction=botright -winheight=9 quickfix<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
+nnoremap <silent> ,up :<C-u>Unite process<CR>
 
 "colorschemes
 NeoBundleLazy 'nanotech/jellybeans.vim',{
