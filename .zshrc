@@ -72,14 +72,18 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texb
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
-alias ql='qlmanage -p "$@" >& /dev/null'
-alias goprog='cd ~/Documents/programs/'
-alias findershowhided='source ~/findershowhide.sh'
-alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
-alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-alias em++='~/emscripten/em++ '
-alias emcc='~/emscripten/emcc'
-alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
+case ${OSTYPE} in
+	darwin*)
+		alias ql='qlmanage -p "$@" >& /dev/null'
+		alias findershowhided='source ~/findershowhide.sh'
+		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
+		alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
+		alias em++='~/emscripten/em++ '
+		alias emcc='~/emscripten/emcc'
+		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
+		;;
+esac
+		alias goprog='cd ~/Documents/programs/'
 alias eit='exit'
 alias exity='exit'
 alias trash='mv "$@" ~/.Trash/'
