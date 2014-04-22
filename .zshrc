@@ -54,7 +54,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.cabal/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -74,6 +73,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texb
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 case ${OSTYPE} in
 	darwin*)
+		export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.cabal/bin"
 		alias ql='qlmanage -p "$@" >& /dev/null'
 		alias findershowhided='source ~/findershowhide.sh'
 		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
@@ -81,12 +81,22 @@ case ${OSTYPE} in
 		alias em++='~/emscripten/em++ '
 		alias emcc='~/emscripten/emcc'
 		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
+		alias trash='mv "$@" ~/.Trash/'
+		;;
+	linux*)
+		export PATH=${HOME}/.cabal/bin:${HOME}/.gem/ruby/2.1.0/bin:$PATH
+		ibus-daemon -drx
+		alias chromium_tether='chromium --proxy-server="socks5://10.0.0.10:8888"'
+		alias vi='vim'
+		alias -g C='|xsel --input --clipboard'
+		alias tetherset='sudo ifconfig wlp2s0 10.0.0.1 netmask 255.255.255.0'
+		alias tetherstart='sudo hostapd /etc/hostapd/hostapd.conf'
 		;;
 esac
-		alias goprog='cd ~/Documents/programs/'
+alias goprog='cd ~/Documents/programs/'
 alias eit='exit'
+alias :q='exit'
 alias exity='exit'
-alias trash='mv "$@" ~/.Trash/'
 alias -g awk='gawk'
 alias la='ls -A'
 alias ll='ls -la'
