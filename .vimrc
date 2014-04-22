@@ -247,6 +247,9 @@ if has('vim_starting')
     endif
     if has('mac')
 	    NeoBundle 'modsound/macdict-vim'
+	else
+		NeoBundle 'jcf/vim-latex'
+		NeoBundle 'altercation/vim-colors-solarized'
     endif
     NeoBundle 'tpope/vim-fugitive'
     NeoBundle 'mattn/excelview-vim'

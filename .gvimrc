@@ -16,7 +16,9 @@ augroup END
 highlight CursorLineNr guifg=#839496
 
 "multi_byte ime
-set noimdisableactivate
+if has('mac')
+	set noimdisableactivate
+endif
 if has('multi_byte_ime') || has('xim')
 	highlight Cursor guifg=NONE guibg=#839496
 	highlight CursorIM guifg=NONE guibg=#b58900
@@ -60,4 +62,8 @@ endif
 set visualbell t_vb=
 if !has('mac')
 	set mouse=
+	set guioptions-=m
+	set guioptions-=T
+	set guioptions-=r
+	set guifont=Monospace\ 11
 endif
