@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 case ${OSTYPE} in
 	darwin*)
-		export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.cabal/bin"
+		export PATH="/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.cabal/bin"
 		alias ql='qlmanage -p "$@" >& /dev/null'
 		alias findershowhided='source ~/findershowhide.sh'
 		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
