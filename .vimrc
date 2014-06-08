@@ -226,6 +226,8 @@ if has('vim_starting')
     NeoBundle 'KPCCoiL/neosnippet-snippets'
     NeoBundle 'yuratomo/w3m.vim'
     NeoBundle 'Shougo/neomru.vim'
+    NeoBundle 'rbtnn/rabbit-ui.vim'
+    NeoBundle 'rbtnn/rabbit-ui-collection.vim'
     NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
     if neobundle#tap('jazzradio.vim')
 	    call neobundle#config({
