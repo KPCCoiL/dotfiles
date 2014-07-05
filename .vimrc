@@ -88,7 +88,7 @@ command! -nargs=0 -range=% Count :<line1>,<line2>s/./&/gn | :noh
 command! -nargs=0 Delhl /aaaaaaaaa
 "awk calc
 function! s:Calc(expression)
-	execute "!awk \"BEGIN{print ".a:expression."}\""
+	execute "VimProcBang awk \"BEGIN{print ".a:expression."}\""
 endfunction
 command! -nargs=* Calc call s:Calc(<f-args>)
 "syntaxinfo
