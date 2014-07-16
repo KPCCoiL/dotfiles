@@ -51,6 +51,8 @@ set backupdir=$HOME/.vim-backup
 set background=dark
 set nrformats-=octal
 set nrformats+=alpha
+set ignorecase
+set wildmode=longest:fill,full
 
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
@@ -228,6 +230,7 @@ if has('vim_starting')
     NeoBundle 'Shougo/neomru.vim'
     NeoBundle 'rbtnn/rabbit-ui.vim'
     NeoBundle 'rbtnn/rabbit-ui-collection.vim'
+    NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
     NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
     if neobundle#tap('jazzradio.vim')
 	    call neobundle#config({
@@ -342,6 +345,7 @@ let g:vimshell_secondary_prompt = "> "
 nnoremap ,vp :<C-u>VimShellPop<CR>
 nnoremap ,vt :<C-u>VimShellTab<CR>
 nnoremap ,vs :<C-u>VimShell<CR>
+nnoremap ,gh :<C-u>VimShellInteractive ghci
 
 "Setting for VimFiler
 let g:vimfiler_as_default_explorer=1
