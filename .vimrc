@@ -52,7 +52,7 @@ set background=dark
 set nrformats-=octal
 set nrformats+=alpha
 set ignorecase
-set wildmode=longest:fill,full
+set wildmode=longest:full,full
 
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
