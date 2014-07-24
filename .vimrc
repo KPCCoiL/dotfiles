@@ -345,7 +345,7 @@ let g:vimshell_secondary_prompt = "> "
 nnoremap ,vp :<C-u>VimShellPop<CR>
 nnoremap ,vt :<C-u>VimShellTab<CR>
 nnoremap ,vs :<C-u>VimShell<CR>
-nnoremap ,gh :<C-u>VimShellInteractive ghci
+nnoremap ,gh :<C-u>VimShellInteractive ghci<CR>
 
 "Setting for VimFiler
 let g:vimfiler_as_default_explorer=1
