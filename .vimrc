@@ -226,6 +226,7 @@ if has('vim_starting')
     NeoBundle 'tyru/open-browser.vim'
     NeoBundle 'basyura/twibill.vim'
     NeoBundle 'KPCCoiL/neosnippet-snippets'
+    NeoBundle 'KPCCoiL/returnzero'
     NeoBundle 'yuratomo/w3m.vim'
     NeoBundle 'Shougo/neomru.vim'
     NeoBundle 'rbtnn/rabbit-ui.vim'
@@ -368,6 +369,9 @@ so $VIMRUNTIME/macros/matchit.vim
 "Tweetvim
 nnoremap ,tw :<C-u>TweetVimCommandSay<CR>
 command! HomeTwitter :TweetVimHomeTime
+
+"returnzero
+imap <CR> <Plug>(returnzero)
 
 "setting for lightline
 let g:lightline = {
