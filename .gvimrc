@@ -65,5 +65,5 @@ if !has('mac')
 	set guioptions-=m
 	set guioptions-=T
 	set guioptions-=r
-	set guifont=Monospace\ 11
+	set guifont=Ricty\ Discord\ 13
 endif

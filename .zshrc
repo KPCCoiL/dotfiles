@@ -84,6 +84,30 @@ case ${OSTYPE} in
 		alias emcc='~/emscripten/emcc'
 		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
 		alias trash='mv "$@" ~/.Trash/'
+		alias ls="ls -G"
+		export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include
+		zstyle ':completion:*' list-colors 'di=36:ln=31:so=35:pi=33:ex=32:bd=34:cd=34' ${(s.:.)LS_COLORS}
+		export LSCOLORS=gxbxfxdxcxegedabagacad
+		export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		# --------------------------------------
+		# Google search from terminal
+		# --------------------------------------
+		google(){
+			if [ $(echo $1 | egrep "^-[cfs]$") ]; then
+				local opt="$1"
+				shift
+			fi
+			local url="https://www.google.co.jp/search?q=${*// /+}"
+			local app="/Applications"
+			local c="${app}/Chromium.app"
+			local s="${app}/Safari.app"
+			case ${opt} in
+				"-c")   open "${url}" -a "$c";;
+				"-s")   open "${url}" -a "$s";;
+				"-w")	/usr/local/bin/w3m "${url}";;
+				*)      open "${url}";;
+			esac
+		}
 		;;
 	linux*)
 		export PATH=${HOME}/.cabal/bin:${HOME}/.gem/ruby/2.1.0/bin:$PATH
@@ -93,6 +117,8 @@ case ${OSTYPE} in
 		alias -g C='|xsel --input --clipboard'
 		alias tetherset='sudo ifconfig wlp2s0 10.0.0.1 netmask 255.255.255.0'
 		alias tetherstart='sudo hostapd /etc/hostapd/hostapd.conf'
+		alias ls='ls --color=auto'
+		export CPLUS_INCLUDE_PATH=/usr/include
 		;;
 esac
 alias goprog='cd ~/Documents/programs/'
@@ -113,34 +139,13 @@ setopt correct
 zstyle ':completion:*' list-colors 'di=36:ln=31:so=35:pi=33:ex=32:bd=34:cd=34' ${(s.:.)LS_COLORS}
 export LSCOLORS=gxbxfxdxcxegedabagacad
 export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-alias ls="ls -G"
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} r:|[-_.]=**'
-export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include
 setopt auto_cd
 setopt nolistbeep
 setopt auto_pushd
 setopt list_packed
-#commands
-# --------------------------------------
-# Google search from terminal
-# --------------------------------------
-google(){
-    if [ $(echo $1 | egrep "^-[cfs]$") ]; then
-        local opt="$1"
-        shift
-    fi
-    local url="https://www.google.co.jp/search?q=${*// /+}"
-    local app="/Applications"
-    local c="${app}/Chromium.app"
-    local s="${app}/Safari.app"
-    case ${opt} in
-        "-c")   open "${url}" -a "$c";;
-        "-s")   open "${url}" -a "$s";;
-	"-w")	/usr/local/bin/w3m "${url}";;
-        *)      open "${url}";;
-    esac
-}
 
+#commands
 #--------------------------------------
 #run c++ program
 #--------------------------------------

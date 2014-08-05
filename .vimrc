@@ -180,91 +180,91 @@ filetype off
 
 "Plugins
 if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-    call neobundle#rc(expand('~/.vim/bundle/'))
-    endif
-    " originalrepos on github
-    NeoBundle 'Shougo/neobundle.vim'
-    NeoBundle 'Shougo/vimproc',{
-			    \'build' :{
-    				\'mac':'make -f make_mac.mak',
-    				\'unix':'make -f make_unix.mak',
-				\},
-				\}
-    NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'VimClojure'
-    NeoBundle 'Shougo/vimshell'
-    if has('lua')
-	    NeoBundle 'Shougo/neocomplete.vim'
-    else
-	    NeoBundle 'Shougo/neocomplcache.vim'
-    endif
-    NeoBundle 'Shougo/neosnippet'
-    NeoBundle 'Shougo/vimfiler'
-    NeoBundle 'xuhdev/SingleCompile'
-    NeoBundleLazy 'hail2u/h2u_colorscheme',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-    NeoBundle 'cocopon/colorswatch.vim'
-    NeoBundleLazy 'thinca/vim-scouter',{
-    	\"autoload" : {"commands" : ["Scouter"]}}
-    NeoBundle 'itchyny/lightline.vim'
-    NeoBundle 'cohama/vim-hier'
-    NeoBundleLazy 'dag/vim2hs',{
-    	\"autoload" : {"filetypes" : ["haskell"]}}
-    NeoBundleLazy 'eagletmt/ghcmod-vim',{
-    	\"autoload" : {"filetypes" : ["haskell"]}}
-    NeoBundleLazy 'pbrisbin/html-template-syntax',{
-    	\"autoload" : {"filetypes" : ["html"]}}
-    NeoBundleLazy 'eagletmt/neco-ghc',{
-    	\"autoload" : {"filetypes" : ["haskell"]}}
-    NeoBundle 'kana/vim-smartchr'
-    NeoBundle 'vim-scripts/DrawIt'
-    NeoBundle 'vim-scripts/VimCoder.jar'
-    NeoBundle 'thinca/vim-template'
-    NeoBundle 'basyura/TweetVim'
-    NeoBundle 'mattn/webapi-vim'
-    NeoBundle 'tyru/open-browser.vim'
-    NeoBundle 'basyura/twibill.vim'
-    NeoBundle 'KPCCoiL/neosnippet-snippets'
-    NeoBundle 'KPCCoiL/returnzero'
-    NeoBundle 'yuratomo/w3m.vim'
-    NeoBundle 'Shougo/neomru.vim'
-    NeoBundle 'rbtnn/rabbit-ui.vim'
-    NeoBundle 'rbtnn/rabbit-ui-collection.vim'
-    NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-    NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
-    if neobundle#tap('jazzradio.vim')
-	    call neobundle#config({
-				    \   'autoload' : {
-				    \     'unite_sources' : [
-				    \       'jazzradio'
-				    \     ],
-				    \     'commands' : [
-				    \       'JazzradioUpdateChannels',
-				    \       'JazzradioStop',
-				    \       {
-				    \         'name' : 'JazzradioPlay',
-				    \         'complete' : 'customlist,jazzradio#channel_id_complete'
-				    \       }
-				    \     ],
-				    \     'function_prefix' : 'jazzradio'
-				    \   }
-				    \ })
-    endif
-    if has('mac')
-	    NeoBundle 'modsound/macdict-vim'
-	else
-		NeoBundle 'jcf/vim-latex'
-		NeoBundle 'altercation/vim-colors-solarized'
-    endif
-    NeoBundle 'tpope/vim-fugitive'
-    NeoBundle 'mattn/excelview-vim'
-    NeoBundle 'tpope/vim-surround'
-    NeoBundle 'rbtnn/vimconsole.vim'
+	set runtimepath+=~/.vim/bundle/neobundle.vim
+	call neobundle#rc(expand('~/.vim/bundle/'))
+endif
+" originalrepos on github
+NeoBundle 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/vimproc',{
+			\'build' :{
+			\'mac':'make -f make_mac.mak',
+			\'unix':'make -f make_unix.mak',
+			\},
+			\}
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'VimClojure'
+NeoBundle 'Shougo/vimshell'
+if has('lua')
+	NeoBundle 'Shougo/neocomplete.vim'
+else
+	NeoBundle 'Shougo/neocomplcache.vim'
+endif
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'xuhdev/SingleCompile'
+NeoBundleLazy 'hail2u/h2u_colorscheme',{
+			\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+NeoBundle 'cocopon/colorswatch.vim'
+NeoBundleLazy 'thinca/vim-scouter',{
+			\"autoload" : {"commands" : ["Scouter"]}}
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'cohama/vim-hier'
+NeoBundleLazy 'dag/vim2hs',{
+			\"autoload" : {"filetypes" : ["haskell"]}}
+NeoBundleLazy 'eagletmt/ghcmod-vim',{
+			\"autoload" : {"filetypes" : ["haskell"]}}
+NeoBundleLazy 'pbrisbin/html-template-syntax',{
+			\"autoload" : {"filetypes" : ["html"]}}
+NeoBundleLazy 'eagletmt/neco-ghc',{
+			\"autoload" : {"filetypes" : ["haskell"]}}
+NeoBundle 'kana/vim-smartchr'
+NeoBundle 'vim-scripts/DrawIt'
+NeoBundle 'vim-scripts/VimCoder.jar'
+NeoBundle 'thinca/vim-template'
+NeoBundle 'basyura/TweetVim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'basyura/twibill.vim'
+NeoBundle 'KPCCoiL/neosnippet-snippets'
+NeoBundle 'KPCCoiL/returnzero'
+NeoBundle 'yuratomo/w3m.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'rbtnn/rabbit-ui.vim'
+NeoBundle 'rbtnn/rabbit-ui-collection.vim'
+NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
+if neobundle#tap('jazzradio.vim')
+	call neobundle#config({
+				\   'autoload' : {
+				\     'unite_sources' : [
+				\       'jazzradio'
+				\     ],
+				\     'commands' : [
+				\       'JazzradioUpdateChannels',
+				\       'JazzradioStop',
+				\       {
+				\         'name' : 'JazzradioPlay',
+				\         'complete' : 'customlist,jazzradio#channel_id_complete'
+				\       }
+				\     ],
+				\     'function_prefix' : 'jazzradio'
+				\   }
+				\ })
+endif
+if has('mac')
+	NeoBundle 'modsound/macdict-vim'
+else
+	NeoBundle 'jcf/vim-latex'
+	NeoBundle 'altercation/vim-colors-solarized'
+endif
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'mattn/excelview-vim'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'rbtnn/vimconsole.vim'
 
-    filetype plugin indent on     " required!
-    filetype indent on
-    syntax on
+filetype plugin indent on     " required!
+filetype indent on
+syntax on
 
 "Setting for Neocomplete
 let g:neocomplete#enable_at_startup = 1
@@ -322,10 +322,11 @@ call SingleCompile#SetCompilerTemplate(
     \ 'GNU C++ Compiler',
     \'g++', '-std=c++11 -g -o $(FILE_TITLE)$', 
     \common_run_command)
-let emrun = 'd8 $(FILE_TITLE)$.js'
+let emrun = 'node $(FILE_TITLE)$.js'
+if has('mac')
 call SingleCompile#SetCompilerTemplate(
     \ 'cpp', 'em++', 
-    \ 'enscripten Compiler', '~/emscripten/em++', '-O3 --closure 1 -o $(FILE_TITLE)$.js', 
+    \ 'enscripten Compiler', has('mac')?'~/emscripten/em++' : 'em++', '-O3 --closure 1 -o $(FILE_TITLE)$.js', 
     \emrun)
 call SingleCompile#ChooseCompiler('cpp','g++ 11')
 
