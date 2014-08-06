@@ -278,6 +278,7 @@ inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-b>     neocomplete#complete_common_string()
 
 "Setting for Unite
+let g:unite_source_history_yank_enable = 1
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
@@ -323,7 +324,6 @@ call SingleCompile#SetCompilerTemplate(
     \'g++', '-std=c++11 -g -o $(FILE_TITLE)$', 
     \common_run_command)
 let emrun = 'node $(FILE_TITLE)$.js'
-if has('mac')
 call SingleCompile#SetCompilerTemplate(
     \ 'cpp', 'em++', 
     \ 'enscripten Compiler', has('mac')?'~/emscripten/em++' : 'em++', '-O3 --closure 1 -o $(FILE_TITLE)$.js', 
