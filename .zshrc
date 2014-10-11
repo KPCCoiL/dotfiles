@@ -85,7 +85,7 @@ case ${OSTYPE} in
 		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
 		alias trash='mv "$@" ~/.Trash/'
 		alias ls="ls -G"
-		export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include
+		export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include:${HOME}/Documents/Sprout
 		zstyle ':completion:*' list-colors 'di=36:ln=31:so=35:pi=33:ex=32:bd=34:cd=34' ${(s.:.)LS_COLORS}
 		export LSCOLORS=gxbxfxdxcxegedabagacad
 		export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
