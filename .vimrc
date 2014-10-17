@@ -328,6 +328,13 @@ call SingleCompile#SetCompilerTemplate(
     \ 'enscripten Compiler', has('mac')?'~/emscripten/em++' : 'em++', '-O3 --closure 1 -o $(FILE_TITLE)$.js', 
     \emrun)
 call SingleCompile#ChooseCompiler('cpp','g++ 11')
+call SingleCompile#SetCompilerTemplate(
+	\ 'scheme','gosh',
+	\ 'Gauche',
+	\ 'gosh',
+	\ '',
+	\ '')
+call SingleCompile#ChooseCompiler('scheme','gosh')
 
 "vim-smartchr
 augroup chars
