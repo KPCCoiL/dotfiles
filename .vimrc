@@ -217,6 +217,7 @@ NeoBundleLazy 'pbrisbin/html-template-syntax',{
 			\"autoload" : {"filetypes" : ["html"]}}
 NeoBundleLazy 'eagletmt/neco-ghc',{
 			\"autoload" : {"filetypes" : ["haskell"]}}
+NeoBundle 'derekwyatt/vim-scala'
 NeoBundle 'kana/vim-smartchr'
 NeoBundle 'vim-scripts/DrawIt'
 NeoBundle 'vim-scripts/VimCoder.jar'

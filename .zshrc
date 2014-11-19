@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 case ${OSTYPE} in
 	darwin*)
-		export PATH="/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.cabal/bin"
+		export PATH="/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
 		export XMODIFIERS="@im=uim"
 		export GTK_IM_MODULE="uim"
 		alias ql='qlmanage -p "$@" >& /dev/null'
