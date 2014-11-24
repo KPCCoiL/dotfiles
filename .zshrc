@@ -80,8 +80,6 @@ case ${OSTYPE} in
 		alias findershowhided='source ~/findershowhide.sh'
 		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
 		alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
-		alias em++='~/emscripten/em++ '
-		alias emcc='~/emscripten/emcc'
 		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
 		alias trash='mv "$@" ~/.Trash/'
 		alias ls="ls -G"
