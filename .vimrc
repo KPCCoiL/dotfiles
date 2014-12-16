@@ -358,7 +358,7 @@ nnoremap ,gh :<C-u>VimShellInteractive ghci<CR>
 
 "Setting for VimFiler
 let g:vimfiler_as_default_explorer=1
-nnoremap ,vf :<C-u>VimFiler
+nnoremap ,vf :<C-u>VimFiler<CR>
 
 "auto new dir
 augroup vimrc-auto-mkdir  " {{{
