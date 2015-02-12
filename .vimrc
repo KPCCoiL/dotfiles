@@ -30,9 +30,9 @@ if has('mac')
 	let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
 	let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
 elseif has('unix')
-	let g:Tex_CompileRule_pdf = 'ptex2pdf -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
+	let g:Tex_CompileRule_pdf = 'platex -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
 	let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
-	let g:Tex_CompileRule_dvi = 'uplatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+	let g:Tex_CompileRule_dvi = 'dvipdfmx'
 	let g:Tex_BibtexFlavor = 'upbibtex'
 	let g:Tex_MakeIndexFlavor = 'makeindex $*.idx'
 	let g:Tex_UseEditorSettingInDVIViewer = 1
