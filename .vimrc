@@ -254,6 +254,7 @@ if neobundle#tap('jazzradio.vim')
 endif
 if has('mac')
 	NeoBundle 'modsound/macdict-vim'
+	NeoBundle 'ryutorion/vim-itunes'
 endif
 NeoBundle 'jcf/vim-latex'
 NeoBundle 'altercation/vim-colors-solarized'

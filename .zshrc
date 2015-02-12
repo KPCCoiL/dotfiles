@@ -74,8 +74,8 @@ source $ZSH/oh-my-zsh.sh
 case ${OSTYPE} in
 	darwin*)
 		export PATH="/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
-		export XMODIFIERS="@im=uim"
-		export GTK_IM_MODULE="uim"
+		export XMODIFIERS="@im=anthy"
+		export GTK_IM_MODULE="anthy"
 		alias ql='qlmanage -p "$@" >& /dev/null'
 		alias findershowhided='source ~/findershowhide.sh'
 		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
@@ -112,6 +112,8 @@ case ${OSTYPE} in
 		ibus-daemon -drx
 		alias chromium_tether='chromium --proxy-server="socks5://10.0.0.10:8888"'
 		alias vi='vim'
+		export LSCOLORS=gxbxfxdxcxegedabagacad
+		export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 		alias -g C='|xsel --input --clipboard'
 		alias tetherset='sudo ifconfig wlp2s0 10.0.0.1 netmask 255.255.255.0'
 		alias tetherstart='sudo hostapd /etc/hostapd/hostapd.conf'
@@ -154,6 +156,8 @@ runcpp(){
 }
 alias emacs='vim'
 alias reload='source ~/.zshrc'
+alias cvim='vim -u NONE -U NONE --noplugin'
+alias cgvim='gvim -u NONE -U NONE --noplugin'
 
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
