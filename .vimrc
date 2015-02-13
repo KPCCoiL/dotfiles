@@ -53,6 +53,9 @@ set nrformats-=octal
 set nrformats+=alpha
 set ignorecase
 set wildmode=longest:full,full
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
 
 "keymaps
 inoremap () ()<++><Left><Left><Left><Left><Left>
@@ -262,6 +265,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mattn/excelview-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'rbtnn/vimconsole.vim'
+NeoBundle "mopp/AOJ.vim"
 
 filetype plugin indent on     " required!
 filetype indent on
