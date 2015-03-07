@@ -268,7 +268,7 @@ NeoBundle 'mattn/excelview-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'rbtnn/vimconsole.vim'
 NeoBundle 'mopp/AOJ.vim'
-NeoBundle 'havenshell/vim-slack'
+NeoBundle 'heavenshell/vim-slack'
 
 filetype plugin indent on     " required!
 filetype indent on
