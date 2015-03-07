@@ -15,20 +15,22 @@ let g:Imap_DeleteEmptyPlaceHolders = 1
 let g:Imap_StickyPlaceHolders = 0
 let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_FormatDependency_ps = 'dvi,ps'
-let g:Tex_FormatDependency_pdf = 'dvi,pdf'
+let g:Tex_FormatDependency_pdf = 'dvi, pdf'
 
 "Setting of each environment
 if has('mac')
 	imap <D-i> <Return><A-i>
 	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
 	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
-	let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+	"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
+	let g:Tex_CompileRule_pdf = '/usr/texbin/xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
 	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
 	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
 	let g:Tex_UseEditorSettingInDVIViewer = 1
 	let g:Tex_ViewRule_dvi = '/usr/bin/open -a PictPrinter.app'
 	let g:Tex_ViewRule_ps = '/usr/local/bin/gv --watch'
 	let g:Tex_ViewRule_pdf = '/usr/bin/open -a Preview.app'
+	let g:Tex_FormatDependency_pdf = 'pdf'
 elseif has('unix')
 	let g:Tex_CompileRule_pdf = 'platex -u -l -ot "-synctex=1 -interaction=nonstopmode -file-line-error-style" $*'
 	let g:Tex_CompileRule_ps = 'dvips -Ppdf -o $*.ps $*.dvi'
@@ -265,7 +267,8 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'mattn/excelview-vim'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'rbtnn/vimconsole.vim'
-NeoBundle "mopp/AOJ.vim"
+NeoBundle 'mopp/AOJ.vim'
+NeoBundle 'havenshell/vim-slack'
 
 filetype plugin indent on     " required!
 filetype indent on
