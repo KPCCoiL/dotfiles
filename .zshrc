@@ -73,11 +73,10 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 case ${OSTYPE} in
 	darwin*)
-		export PATH="/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin"
+		export PATH="/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/texbin:/Users/akifumi/.vim/bundle/neobundle.vim/bin"
 		export XMODIFIERS="@im=anthy"
 		export GTK_IM_MODULE="anthy"
 		alias ql='qlmanage -p "$@" >& /dev/null'
-		alias findershowhided='source ~/findershowhide.sh'
 		alias gvim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim  -g "$@"'
 		alias vim='env LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim "$@"'
 		alias nicodl='ruby ~/Documents/programs/ruby/nicodl.rb'
@@ -102,7 +101,7 @@ case ${OSTYPE} in
 			case ${opt} in
 				"-c")   open "${url}" -a "$c";;
 				"-s")   open "${url}" -a "$s";;
-				"-w")	/usr/local/bin/w3m "${url}";;
+				"-w")	w3m "${url}";;
 				*)      open "${url}";;
 			esac
 		}
@@ -156,8 +155,6 @@ runcpp(){
 }
 alias emacs='vim'
 alias reload='source ~/.zshrc'
-alias cvim='vim -u NONE -U NONE --noplugin'
-alias cgvim='gvim -u NONE -U NONE --noplugin'
 
 function zle-line-init zle-keymap-select {
   case $KEYMAP in
