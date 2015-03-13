@@ -85,7 +85,7 @@ case ${OSTYPE} in
 		export CPLUS_INCLUDE_PATH=/usr/local/Cellar/boost/1.55.0/include:${HOME}/Documents/Sprout
 		zstyle ':completion:*' list-colors 'di=36:ln=31:so=35:pi=33:ex=32:bd=34:cd=34' ${(s.:.)LS_COLORS}
 		export LSCOLORS=gxbxfxdxcxegedabagacad
-		export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 		# --------------------------------------
 		# Google search from terminal
 		# --------------------------------------
@@ -112,7 +112,7 @@ case ${OSTYPE} in
 		alias chromium_tether='chromium --proxy-server="socks5://10.0.0.10:8888"'
 		alias vi='vim'
 		export LSCOLORS=gxbxfxdxcxegedabagacad
-		export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+		export LS_COLORS='di=36:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
 		alias -g C='|xsel --input --clipboard'
 		alias tetherset='sudo ifconfig wlp2s0 10.0.0.1 netmask 255.255.255.0'
 		alias tetherstart='sudo hostapd /etc/hostapd/hostapd.conf'
