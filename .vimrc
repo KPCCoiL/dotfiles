@@ -23,7 +23,7 @@ if has('mac')
 	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
 	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
 	"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-	let g:Tex_CompileRule_pdf = '/usr/texbin/xelatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+	let g:Tex_CompileRule_pdf = '/usr/texbin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
 	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
 	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
 	let g:Tex_UseEditorSettingInDVIViewer = 1
@@ -270,6 +270,8 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'rbtnn/vimconsole.vim'
 NeoBundle 'mopp/AOJ.vim'
 NeoBundle 'heavenshell/vim-slack'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'idris-hackers/idris-vim'
 
 filetype plugin indent on     " required!
 filetype indent on
@@ -332,6 +334,11 @@ call SingleCompile#SetCompilerTemplate(
     \ 'GNU C++ Compiler',
     \'g++', '-std=c++11 -g -o $(FILE_TITLE)$', 
     \common_run_command)
+call SingleCompile#SetCompilerTemplate(
+    \ 'cpp', 'clang++ 14',
+    \ 'clang C++ Compiler',
+    \ 'clang++-3.6', '-std=c++1y -g -o $(FILE_TITLE)$',
+    \ common_run_command)
 let emrun = 'node $(FILE_TITLE)$.js'
 call SingleCompile#SetCompilerTemplate(
     \ 'cpp', 'em++', 
@@ -389,6 +396,11 @@ command! HomeTwitter :TweetVimHomeTime
 
 "returnzero
 imap <CR> <Plug>(returnzero)
+
+"vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_auto_colors = 1
 
 "setting for lightline
 let g:lightline = {
