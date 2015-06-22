@@ -41,6 +41,9 @@ function! s:Light()
 endfunction
 command! -nargs=0 Light call s:Light()
 
+"vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+
 function! s:Dark()
 	set background=dark
 	if has('multi_byte_ime') || has('xim')
@@ -52,7 +55,7 @@ endfunction
 command! -nargs=0 Dark call s:Dark()
 let time=localtime()
 let now=strftime("%H",time)
-if(time>=16)
+if(now >= 16)
 	call s:Dark()
 else 
 	call s:Light()
