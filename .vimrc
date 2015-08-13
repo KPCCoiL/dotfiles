@@ -186,92 +186,118 @@ filetype off
 
 "Plugins
 if has('vim_starting')
-	set runtimepath+=~/.vim/bundle/neobundle.vim
-	call neobundle#begin(expand('~/.vim/bundle/'))
-	NeoBundleFetch 'Shogo/neobundle.vim'
-	call neobundle#end()
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+    call neobundle#begin(expand('~/.vim/bundle/'))
+    NeoBundleFetch 'Shogo/neobundle.vim'
+    NeoBundle 'Shougo/vimproc',{
+                \'build' :{
+                \'mac':'make -f make_mac.mak',
+                \'unix':'make -f make_unix.mak',
+                \},
+                \}
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'VimClojure'
+    NeoBundle 'Shougo/vimshell'
+    if has('lua')
+        NeoBundle 'Shougo/neocomplete.vim'
+    else
+        NeoBundle 'Shougo/neocomplcache.vim'
+    endif
+    NeoBundle 'Shougo/neosnippet'
+    NeoBundle 'Shougo/vimfiler'
+    NeoBundle 'xuhdev/SingleCompile'
+    NeoBundleLazy 'hail2u/h2u_colorscheme',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundle 'cocopon/colorswatch.vim'
+    NeoBundleLazy 'thinca/vim-scouter',{
+                \"autoload" : {"commands" : ["Scouter"]}}
+    NeoBundle 'itchyny/lightline.vim'
+    NeoBundle 'cohama/vim-hier'
+    NeoBundleLazy 'dag/vim2hs',{
+                \"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundleLazy 'eagletmt/ghcmod-vim',{
+                \"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundleLazy 'pbrisbin/html-template-syntax',{
+                \"autoload" : {"filetypes" : ["html"]}}
+    NeoBundleLazy 'eagletmt/neco-ghc',{
+                \"autoload" : {"filetypes" : ["haskell"]}}
+    NeoBundle 'derekwyatt/vim-scala'
+    NeoBundle 'kana/vim-smartchr'
+    NeoBundle 'vim-scripts/DrawIt'
+    NeoBundle 'vim-scripts/VimCoder.jar'
+    NeoBundle 'thinca/vim-template'
+    NeoBundle 'basyura/TweetVim'
+    NeoBundle 'mattn/webapi-vim'
+    NeoBundle 'tyru/open-browser.vim'
+    NeoBundle 'basyura/twibill.vim'
+    NeoBundle 'KPCCoiL/neosnippet-snippets'
+    NeoBundle 'KPCCoiL/prf-copl'
+    NeoBundle 'KPCCoiL/returnzero'
+    NeoBundle 'yuratomo/w3m.vim'
+    NeoBundle 'Shougo/neomru.vim'
+    NeoBundle 'rbtnn/rabbit-ui.vim'
+    NeoBundle 'rbtnn/rabbit-ui-collection.vim'
+    NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
+    NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
+    if neobundle#tap('jazzradio.vim')
+        call neobundle#config({
+                    \   'autoload' : {
+                    \     'unite_sources' : [
+                    \       'jazzradio'
+                    \     ],
+                    \     'commands' : [
+                    \       'JazzradioUpdateChannels',
+                    \       'JazzradioStop',
+                    \       {
+                    \         'name' : 'JazzradioPlay',
+                    \         'complete' : 'customlist,jazzradio#channel_id_complete'
+                    \       }
+                    \     ],
+                    \     'function_prefix' : 'jazzradio'
+                    \   }
+                    \ })
+    endif
+    if has('mac')
+        NeoBundle 'modsound/macdict-vim'
+        NeoBundle 'ryutorion/vim-itunes'
+    endif
+    NeoBundle 'jcf/vim-latex'
+    NeoBundle 'altercation/vim-colors-solarized'
+    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'mattn/excelview-vim'
+    NeoBundle 'tpope/vim-surround'
+    NeoBundle 'rbtnn/vimconsole.vim'
+    NeoBundle 'mopp/AOJ.vim'
+    NeoBundle 'heavenshell/vim-slack'
+    NeoBundle 'nathanaelkane/vim-indent-guides'
+    NeoBundle 'idris-hackers/idris-vim'
+
+    "colorschemes
+    NeoBundleLazy 'nanotech/jellybeans.vim',{
+                \"autoload" : {"commands" :["Unite colorscheme -auto-preview"]}}
+    NeoBundleLazy 'w0ng/vim-hybrid',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundleLazy 'tomasr/molokai',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundleLazy 'vim-scripts/rdark',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundleLazy 'jpo/vim-railscasts-theme',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundleLazy 'itchyny/landscape.vim',{
+                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+
+    "Unite sources
+    NeoBundle 'ujihisa/unite-colorscheme'
+    NeoBundle 'h1mesuke/unite-outline'
+    NeoBundle 'osyo-manga/unite-quickfix'
+    NeoBundle 'tsukkee/unite-help'
+    if has('mac')
+        NeoBundle 'choplin/unite-spotlight'
+        nnoremap ,us :<C-u>Unite spotlight
+    endif
+    call neobundle#end()
 endif
-NeoBundle 'Shougo/vimproc',{
-			\'build' :{
-			\'mac':'make -f make_mac.mak',
-			\'unix':'make -f make_unix.mak',
-			\},
-			\}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'VimClojure'
-NeoBundle 'Shougo/vimshell'
-if has('lua')
-	NeoBundle 'Shougo/neocomplete.vim'
-else
-	NeoBundle 'Shougo/neocomplcache.vim'
-endif
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'xuhdev/SingleCompile'
-NeoBundleLazy 'hail2u/h2u_colorscheme',{
-			\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundle 'cocopon/colorswatch.vim'
-NeoBundleLazy 'thinca/vim-scouter',{
-			\"autoload" : {"commands" : ["Scouter"]}}
-NeoBundle 'itchyny/lightline.vim'
-NeoBundle 'cohama/vim-hier'
-NeoBundleLazy 'dag/vim2hs',{
-			\"autoload" : {"filetypes" : ["haskell"]}}
-NeoBundleLazy 'eagletmt/ghcmod-vim',{
-			\"autoload" : {"filetypes" : ["haskell"]}}
-NeoBundleLazy 'pbrisbin/html-template-syntax',{
-			\"autoload" : {"filetypes" : ["html"]}}
-NeoBundleLazy 'eagletmt/neco-ghc',{
-			\"autoload" : {"filetypes" : ["haskell"]}}
-NeoBundle 'derekwyatt/vim-scala'
-NeoBundle 'kana/vim-smartchr'
-NeoBundle 'vim-scripts/DrawIt'
-NeoBundle 'vim-scripts/VimCoder.jar'
-NeoBundle 'thinca/vim-template'
-NeoBundle 'basyura/TweetVim'
-NeoBundle 'mattn/webapi-vim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'basyura/twibill.vim'
-NeoBundle 'KPCCoiL/neosnippet-snippets'
-NeoBundle 'KPCCoiL/returnzero'
-NeoBundle 'yuratomo/w3m.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'rbtnn/rabbit-ui.vim'
-NeoBundle 'rbtnn/rabbit-ui-collection.vim'
-NeoBundle 'mattn/gist-vim', {'depends': 'mattn/webapi-vim'}
-NeoBundleLazy 'supermomonga/jazzradio.vim', { 'depends' : [ 'Shougo/unite.vim' ] }
-if neobundle#tap('jazzradio.vim')
-	call neobundle#config({
-				\   'autoload' : {
-				\     'unite_sources' : [
-				\       'jazzradio'
-				\     ],
-				\     'commands' : [
-				\       'JazzradioUpdateChannels',
-				\       'JazzradioStop',
-				\       {
-				\         'name' : 'JazzradioPlay',
-				\         'complete' : 'customlist,jazzradio#channel_id_complete'
-				\       }
-				\     ],
-				\     'function_prefix' : 'jazzradio'
-				\   }
-				\ })
-endif
-if has('mac')
-	NeoBundle 'modsound/macdict-vim'
-	NeoBundle 'ryutorion/vim-itunes'
-endif
-NeoBundle 'jcf/vim-latex'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'mattn/excelview-vim'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'rbtnn/vimconsole.vim'
-NeoBundle 'mopp/AOJ.vim'
-NeoBundle 'heavenshell/vim-slack'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'idris-hackers/idris-vim'
+NeoBundleCheck
 
 filetype plugin indent on     " required!
 filetype indent on
@@ -301,31 +327,6 @@ nnoremap <silent> ,ul :<C-u>Unite outline<CR>
 nnoremap <silent> ,uq :<C-u>Unite -no-quit -direction=botright -winheight=9 quickfix<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
 nnoremap <silent> ,up :<C-u>Unite process<CR>
-
-"colorschemes
-NeoBundleLazy 'nanotech/jellybeans.vim',{
-    	\"autoload" : {"commands" :["Unite colorscheme -auto-preview"]}}
-NeoBundleLazy 'w0ng/vim-hybrid',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundleLazy 'tomasr/molokai',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundleLazy 'vim-scripts/rdark',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundleLazy 'jpo/vim-railscasts-theme',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundleLazy 'itchyny/landscape.vim',{
-    	\"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-NeoBundleCheck
-
-"Unite sources
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'osyo-manga/unite-quickfix'
-NeoBundle 'tsukkee/unite-help'
-if has('mac')
-	NeoBundle 'choplin/unite-spotlight'
-	nnoremap ,us :<C-u>Unite spotlight
-endif
 
 "SingleCompile
 let common_run_command = './$(FILE_TITLE)$'
