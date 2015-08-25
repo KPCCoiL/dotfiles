@@ -206,8 +206,6 @@ if has('vim_starting')
     NeoBundle 'Shougo/neosnippet'
     NeoBundle 'Shougo/vimfiler'
     NeoBundle 'xuhdev/SingleCompile'
-    NeoBundleLazy 'hail2u/h2u_colorscheme',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
     NeoBundle 'cocopon/colorswatch.vim'
     NeoBundleLazy 'thinca/vim-scouter',{
                 \"autoload" : {"commands" : ["Scouter"]}}
@@ -271,20 +269,7 @@ if has('vim_starting')
     NeoBundle 'heavenshell/vim-slack'
     NeoBundle 'nathanaelkane/vim-indent-guides'
     NeoBundle 'idris-hackers/idris-vim'
-
-    "colorschemes
-    NeoBundleLazy 'nanotech/jellybeans.vim',{
-                \"autoload" : {"commands" :["Unite colorscheme -auto-preview"]}}
-    NeoBundleLazy 'w0ng/vim-hybrid',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-    NeoBundleLazy 'tomasr/molokai',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-    NeoBundleLazy 'vim-scripts/rdark',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-    NeoBundleLazy 'jpo/vim-railscasts-theme',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
-    NeoBundleLazy 'itchyny/landscape.vim',{
-                \"autoload" : {"commands" : ["Unite colorscheme -auto-preview"]}}
+    NeoBundle '0x0dea/vim-molasses'
 
     "Unite sources
     NeoBundle 'ujihisa/unite-colorscheme'
