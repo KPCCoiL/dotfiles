@@ -23,7 +23,7 @@ if has('mac')
 	let g:Tex_CompileRule_dvi = '/usr/texbin/platex -synctex=1 -interaction=nonstopmode $*'
 	let g:Tex_CompileRule_ps = '/usr/texbin/dvips -Ppdf -o $*.ps $*.dvi'
 	"let g:Tex_CompileRule_pdf = '/usr/texbin/dvipdfmx $*.dvi'
-	let g:Tex_CompileRule_pdf = '/usr/texbin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
+	let g:Tex_CompileRule_pdf = '/usr/local/texlive/2015/bin/x86_64-darwin/lualatex -synctex=1 -interaction=nonstopmode -file-line-error-style $*'
 	let g:Tex_BibtexFlavor = '/usr/texbin/pbibtex'
 	let g:Tex_MakeIndexFlavor = '/usr/texbin/mendex $*.idx'
 	let g:Tex_UseEditorSettingInDVIViewer = 1
