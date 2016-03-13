@@ -270,6 +270,7 @@ if has('vim_starting')
     NeoBundle 'nathanaelkane/vim-indent-guides'
     NeoBundle 'idris-hackers/idris-vim'
     NeoBundle '0x0dea/vim-molasses'
+    NeoBundle 'derekelkins/agda-vim'
 
     "Unite sources
     NeoBundle 'ujihisa/unite-colorscheme'
