@@ -6,6 +6,9 @@
 "   \ \__\ \__\\ \__\ \__\   \ \__\\__\ \__/ /     \ \__\ \__\    \ \__\
 "    \|__|\|__| \|__|\|__|    \|__\|__|\|__|/       \|__|\|__|     \|__|
 
+" Load machine specific settings
+source ${HOME}/.config/nvim/local_init.vim
+
 "dein Scripts----------------------------- {{{
 " Required:
 set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
@@ -59,19 +62,17 @@ call dein#add('fatih/vim-go')
 call dein#add('epdtry/neovim-coq')
 call dein#add('thinca/vim-quickrun')
 
-"Unite sources
+"Denite sources
 call dein#add('ujihisa/unite-colorscheme')
 call dein#add('h1mesuke/unite-outline')
 call dein#add('osyo-manga/unite-quickfix')
 call dein#add('tsukkee/unite-help')
 
 " Platform specific plugins
-if has('mac')
-    dein#add('modsound/macdict-vim')
-    dein#add('ryutorion/vim-itunes')
-    dein#add('choplin/unite-spotlight')
-    nnoremap ,us :<C-u>Unite spotlight
-endif
+for s:pname in g:platform_plugins
+    call dein#add(s:pname)
+    unlet s:pname
+endfor
 
 " Required:
 call dein#end()
@@ -83,9 +84,6 @@ if dein#check_install()
   call dein#install()
 endif
 " }}}
-
-" Load machine specific settings
-source ${HOME}/.config/nvim/local_init.vim
 
 "General settings------------------------ {{{
 filetype plugin on
@@ -118,6 +116,7 @@ inoremap <> <><Left>
 inoremap '' ''<Left>
 inoremap `` ``<Left>
 call arpeggio#map('i', '', 0,  'kl', '<Esc>')
+call arpeggio#map('v', '', 0,  'kl', '<Esc>')
 inoremap <C-l> <Esc>
 vnoremap <C-l> <Esc>
 inoremap <Esc> <Nop>
