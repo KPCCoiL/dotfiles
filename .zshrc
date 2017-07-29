@@ -109,7 +109,7 @@ case ${OSTYPE} in
 		;;
 	linux*)
 		export PATH=${HOME}/.cabal/bin:${HOME}/.gem/ruby/2.1.0/bin:$PATH
-		ibus-daemon -drx
+		#ibus-daemon -drx
 		alias chromium_tether='chromium --proxy-server="socks5://10.0.0.10:8888"'
 		alias vi='vim'
 		export LSCOLORS=gxbxfxdxcxegedabagacad
@@ -154,7 +154,6 @@ runcpp(){
 	g++ ${path} -std=c++11 -o ${path}.out
 	./${path}.out
 }
-alias emacs='vim'
 alias reload='source ~/.zshrc'
 
 function zle-line-init zle-keymap-select {
