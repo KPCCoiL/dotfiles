@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 case ${OSTYPE} in
 	darwin*)
-        export PATH="/Users/akifumi/.local/bin:/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/texlive/2015/bin/x86_64-darwin:/Users/akifumi/.vim/bundle/neobundle.vim/bin:/Users/akifumi/Documents/programs/Haskell/bins/.cabal-sandbox/bin:/Users/akifumi/.opam/system/bin"
+        export PATH="/Users/akifumi/.local/bin:/Users/akifumi/.cabal/bin:/Users/akifumi/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/texlive/2016/bin/x86_64-darwin:/Users/akifumi/.vim/bundle/neobundle.vim/bin:/Users/akifumi/Documents/programs/Haskell/bins/.cabal-sandbox/bin:/Users/akifumi/.opam/system/bin"
 		export XMODIFIERS="@im=anthy"
 		export GTK_IM_MODULE="anthy"
         export GOPATH='/Users/akifumi/.go'

@@ -22,17 +22,16 @@ call dein#add('Shougo/deoplete.nvim')
 call dein#add('SirVer/ultisnips')
 call dein#add('honza/vim-snippets')
 call dein#add('zchee/deoplete-clang')
-call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimproc', { 'build' : 'make'})
 call dein#add('Shougo/denite.nvim')
 call dein#add('VimClojure')
-call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimfiler')
 call dein#add('cocopon/colorswatch.vim')
 call dein#add('kana/vim-arpeggio')
 call dein#add('itchyny/lightline.vim')
 call dein#add('cohama/vim-hier')
 call dein#add('dag/vim2hs', { 'on_ft' : 'haskell' })
+call dein#add('vim-scripts/ats-lang-vim')
 call dein#add('pbrisbin/html-template-syntax', { 'on_ft' : 'html' })
 call dein#add('derekwyatt/vim-scala', { 'on_ft': 'scala' })
 call dein#add('kana/vim-smartchr')
@@ -89,6 +88,7 @@ endif
 filetype plugin on
 filetype indent on
 set shellslash
+set shell=zsh
 set grepprg=grep\ -nH\ $*
 set foldmethod=marker
 set number
@@ -103,9 +103,9 @@ set nrformats-=octal
 set nrformats+=alpha
 set ignorecase
 set wildmode=longest:full,full
-set shiftwidth=4
-set tabstop=4
-set softtabstop=4
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 set expandtab
 set mouse=
 set relativenumber
@@ -114,6 +114,7 @@ inoremap () ()<Left>
 inoremap {} {}<Left>
 inoremap <> <><Left>
 inoremap '' ''<Left>
+inoremap "" ""<Left>
 inoremap `` ``<Left>
 call arpeggio#map('i', '', 0,  'kl', '<Esc>')
 call arpeggio#map('v', '', 0,  'kl', '<Esc>')
@@ -127,7 +128,7 @@ cnoremap <C-n> <Down>
 nmap j gj
 nmap k gk
 nmap Y y$
-colorscheme ron
+colorscheme desert
 so $VIMRUNTIME/macros/matchit.vim
 " }}}
 
@@ -159,4 +160,19 @@ let g:deoplete#sources#clang#sort_algo = "alphabetical"
 " Ultisnips {{{
 let g:UltiSnipsExpandTrigger = "<C-k>"
 let g:UltiSnipsJumpBackwardTrigger = "<C-@>"
+" }}}
+
+" Quickrun {{{
+let g:quickrun_config = {
+      \"_" : {
+      \  "outputter" : "quickfix"
+      \},
+      \"tex" : {
+      \  "type" : "lualatex"
+      \},
+      \"lualatex" : {
+      \  "command" : "lualatex",
+      \  "exec" : "%c %s"
+      \},
+      \}
 " }}}
