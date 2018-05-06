@@ -1,178 +1,132 @@
-" ___  ________   ___  _________    ___      ___ ___  _____ ______      
-"|\  \|\   ___  \|\  \|\___   ___\ |\  \    /  /|\  \|\   _ \  _   \    
-"\ \  \ \  \\ \  \ \  \|___ \  \_| \ \  \  /  / | \  \ \  \\\__\ \  \   
-" \ \  \ \  \\ \  \ \  \   \ \  \   \ \  \/  / / \ \  \ \  \\|__| \  \  
-"  \ \  \ \  \\ \  \ \  \   \ \  \ __\ \    / /   \ \  \ \  \    \ \  \ 
-"   \ \__\ \__\\ \__\ \__\   \ \__\\__\ \__/ /     \ \__\ \__\    \ \__\
-"    \|__|\|__| \|__|\|__|    \|__\|__|\|__|/       \|__|\|__|     \|__|
+"  ,--.        ,--.  ,--.            ,--.           
+" `--',--,--, `--',-'  '-.,--.  ,--.`--',--,--,--. 
+" ,--.|      \,--.'-.  .-' \  `'  / ,--.|        | 
+" |  ||  ||  ||  |  |  |.--.\    /  |  ||  |  |  | 
+" `--'`--''--'`--'  `--''--' `--'   `--'`--`--`--' 
+                                                 
+" dein.vim {{{
+if &compatible
+	set nocompatible
+endif
 
-" Load machine specific settings
-source ${HOME}/.config/nvim/local_init.vim
+let s:dein_location = expand("~/.cache/dein")
+execute 'set runtimepath+=' . s:dein_location . "/repos/github.com/Shougo/dein.vim"
 
-"dein Scripts----------------------------- {{{
-" Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+if dein#load_state(s:dein_location)
+	call dein#begin(s:dein_location)
+	call dein#add(s:dein_location)
+	call dein#add("idris-hackers/idris-vim", {'on_ft' : 'idris'})
+  call dein#add("l04m33/vlime", {'rtp' : 'vim/'})
+	call dein#add("dag/vim-fish")
+	call dein#add("Shougo/deoplete.nvim")
+	call dein#add("Sirver/Ultisnips")
+	call dein#add("honza/vim-snippets")
+	call dein#add("tpope/vim-surround")
+	call dein#add("zeis/vim-kolor")
+	call dein#add("neomake/neomake")
+	call dein#add("skywind3000/asyncrun.vim")
+	call dein#add("Shougo/denite.nvim")
+  call dein#add("easymotion/vim-easymotion")
+  call dein#add("deton/tcvime")
+	call dein#end()
+	call dein#save_state()
+endif
 
-" Required:
-call dein#begin(expand('~/.cache/dein'))
-
-" Let dein manage dein
-call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/deoplete.nvim')
-call dein#add('SirVer/ultisnips')
-call dein#add('honza/vim-snippets')
-call dein#add('zchee/deoplete-clang')
-call dein#add('Shougo/vimproc', { 'build' : 'make'})
-call dein#add('Shougo/denite.nvim')
-call dein#add('VimClojure')
-call dein#add('Shougo/vimfiler')
-call dein#add('cocopon/colorswatch.vim')
-call dein#add('kana/vim-arpeggio')
-call dein#add('itchyny/lightline.vim')
-call dein#add('cohama/vim-hier')
-call dein#add('dag/vim2hs', { 'on_ft' : 'haskell' })
-call dein#add('vim-scripts/ats-lang-vim')
-call dein#add('pbrisbin/html-template-syntax', { 'on_ft' : 'html' })
-call dein#add('derekwyatt/vim-scala', { 'on_ft': 'scala' })
-call dein#add('kana/vim-smartchr')
-call dein#add('vim-scripts/DrawIt', { 'lazy' : 1 })
-call dein#add('vim-scripts/VimCoder.jar')
-call dein#add('thinca/vim-template')
-call dein#add('basyura/TweetVim')
-call dein#add('mattn/webapi-vim')
-call dein#add('tyru/open-browser.vim')
-call dein#add('basyura/twibill.vim')
-"call dein#add('KPCCoiL/neosnippet-snippets')
-call dein#add('KPCCoiL/returnzero')
-call dein#add('yuratomo/w3m.vim')
-call dein#add('Shougo/neomru.vim')
-call dein#add('rbtnn/rabbit-ui.vim')
-call dein#add('rbtnn/rabbit-ui-collection.vim')
-call dein#add('mattn/gist-vim', {'depends': 'mattn/webapi-vim' })
-call dein#add('altercation/vim-colors-solarized')
-call dein#add('tpope/vim-fugitive')
-call dein#add('mattn/excelview-vim')
-call dein#add('tpope/vim-surround')
-call dein#add('rbtnn/vimconsole.vim')
-call dein#add('mopp/AOJ.vim')
-call dein#add('nathanaelkane/vim-indent-guides')
-call dein#add('idris-hackers/idris-vim', { 'on_ft': 'idris'})
-call dein#add('fatih/vim-go')
-call dein#add('epdtry/neovim-coq')
-call dein#add('thinca/vim-quickrun')
-
-"Denite sources
-call dein#add('ujihisa/unite-colorscheme')
-call dein#add('h1mesuke/unite-outline')
-call dein#add('osyo-manga/unite-quickfix')
-call dein#add('tsukkee/unite-help')
-
-" Platform specific plugins
-for s:pname in g:platform_plugins
-    call dein#add(s:pname)
-    unlet s:pname
-endfor
-
-" Required:
-call dein#end()
-
-" Required:
 filetype plugin indent on
+syntax enable
 
 if dein#check_install()
-  call dein#install()
+	call dein#install()
 endif
 " }}}
 
-"General settings------------------------ {{{
-filetype plugin on
-filetype indent on
-set shellslash
-set shell=zsh
-set grepprg=grep\ -nH\ $*
-set foldmethod=marker
-set number
-set incsearch
-set autoread
-set undofile
-set undodir=$HOME/.vim-undo
-set backup
-set backupdir=$HOME/.vim-backup
-set background=dark
-set nrformats-=octal
-set nrformats+=alpha
-set ignorecase
-set wildmode=longest:full,full
+" key behaviors {{{
+if has('mac')
+  nnoremap ; :
+  nnoremap : ;
+  vnoremap ; :
+  vnoremap : ;
+endif
+inoremap <C-l> <Esc>
+vnoremap <C-l> <Esc>
+nnoremap j gj
+vnoremap j gj
+nnoremap k gk
+vnoremap k gk
+nnoremap Y y$
+let mapleader='\<Space>'
+" }}}
+
+" code formatting {{{
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 set expandtab
-set mouse=
-set relativenumber
-hi WarningMsg guifg=bg
-inoremap () ()<Left>
-inoremap {} {}<Left>
-inoremap <> <><Left>
-inoremap '' ''<Left>
-inoremap "" ""<Left>
-inoremap `` ``<Left>
-call arpeggio#map('i', '', 0,  'kl', '<Esc>')
-call arpeggio#map('v', '', 0,  'kl', '<Esc>')
-inoremap <C-l> <Esc>
-vnoremap <C-l> <Esc>
-inoremap <Esc> <Nop>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
-nmap j gj
-nmap k gk
-nmap Y y$
-colorscheme desert
-so $VIMRUNTIME/macros/matchit.vim
 " }}}
 
-" Personal commands ---------------------- {{{
-"binary file
-augroup xxd
-	autocmd!
-	autocmd BufReadPost * if &l:binary | setlocal filetype=xxd |endif
-augroup END
+" look-and-feel {{{
+if !has('gui_vimr')
+	set t_ut=
+endif
+set number
+colorscheme kolor
+set matchtime=1
+set foldmethod=marker
 " }}}
 
-" Plugin specific settings ---------------
+" abbreviations {{{
+abbr reuslt result
+abbr itn int
+" }}}
 
-" deoplete {{{
-augroup deoplete_init
-    autocmd!
-    autocmd VimEnter * call deoplete#initialize()
+" miscellaneous {{{
+set ignorecase
+set incsearch
+set showmatch
+set backup
+set backupdir=~/.nvim-backup
+set undofile
+set undodir=~/.nvim-undo
+command EditConf e $MYVIMRC
+" }}}
+
+"deoplete {{{
 let g:deoplete#enable_at_startup = 1
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS>  deoplete#smart_close_popup()."\<C-h>"
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-
-" deoplete-clang {{{
-let g:deoplete#sources#clang#sort_algo = "alphabetical"
-" }}}
 " }}}
 
 " Ultisnips {{{
-let g:UltiSnipsExpandTrigger = "<C-k>"
-let g:UltiSnipsJumpBackwardTrigger = "<C-@>"
+let g:UltiSnipsExpandTrigger = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger = "<C-f>"
+let g:UltiSnipsJumpBackwardTrigger = "<C-b>"
 " }}}
 
-" Quickrun {{{
-let g:quickrun_config = {
-      \"_" : {
-      \  "outputter" : "quickfix"
-      \},
-      \"tex" : {
-      \  "type" : "lualatex"
-      \},
-      \"lualatex" : {
-      \  "command" : "lualatex",
-      \  "exec" : "%c %s"
-      \},
-      \}
+" neomake {{{
+let g:neomake_open_list = 2
+call neomake#configure#automake('nw', 750)
+" }}}
+
+" tcvime {{{
+set keymap=tutcodep
+set iminsert=0
+let tcvime_keymap = 'tutcodep'
+lmap <silent> <C-h> <C-R>=tcvime#InputPostConvertStart(0)<CR>
+inoremap <C-j> <C-^>
+" }}}
+
+" vlime {{{
+" workaround: dein seems to interfere with vlime in some way.
+let g:vlime_cl_impl = "my_sbcl"
+function! VlimeBuildServerCommandFor_my_sbcl(vlime_loader, vlime_eval)
+  let s:actual_vlime_loader = expand('~/.cache/dein/repos/github.com/l04m33/vlime/lisp/load-vlime.lisp')
+  return vlime#server#BuildServerCommandFor_sbcl(s:actual_vlime_loader, a:vlime_eval)
+endfunction
+
+let g:vlime_neovim_connector = "nc"
+function! VlimeBuildConnectorCommandFor_nc(host, port, timeout)
+  if type(a:timeout) == type(v:null)
+    return ['nc', a:host, string(a:port)]
+  else
+    return ['nc', '-w', string(a:timeout / 1000.0), a:host, string(a:port)]
+  endif
+endfunction
 " }}}
