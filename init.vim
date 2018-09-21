@@ -16,6 +16,7 @@ if dein#load_state(s:dein_location)
 	call dein#begin(s:dein_location)
 	call dein#add(s:dein_location)
 	call dein#add("idris-hackers/idris-vim", {'on_ft' : 'idris'})
+  call dein#add("clojure-vim/acid.nvim")
   call dein#add("l04m33/vlime", {'rtp' : 'vim/'})
 	call dein#add("dag/vim-fish")
 	call dein#add("Shougo/deoplete.nvim")
@@ -108,6 +109,7 @@ call neomake#configure#automake('nw', 750)
 " tcvime {{{
 set keymap=tutcodep
 set iminsert=0
+set imsearch=0
 let tcvime_keymap = 'tutcodep'
 lmap <silent> <C-h> <C-R>=tcvime#InputPostConvertStart(0)<CR>
 inoremap <C-j> <C-^>
