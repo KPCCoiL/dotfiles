@@ -3,34 +3,37 @@
 " ,--.|      \,--.'-.  .-' \  `'  / ,--.|        | 
 " |  ||  ||  ||  |  |  |.--.\    /  |  ||  |  |  | 
 " `--'`--''--'`--'  `--''--' `--'   `--'`--`--`--' 
-                                                 
+
 " dein.vim {{{
 if &compatible
 	set nocompatible
 endif
 
 let s:dein_location = expand("~/.cache/dein")
-execute 'set runtimepath+=' . s:dein_location . "/repos/github.com/Shougo/dein.vim"
+let s:dein_plugin_path = s:dein_location . "/repos/github.com/Shougo/dein.vim"
+execute 'set runtimepath+=' . s:dein_plugin_path
 
 if dein#load_state(s:dein_location)
-	call dein#begin(s:dein_location)
-	call dein#add(s:dein_location)
-	call dein#add("idris-hackers/idris-vim", {'on_ft' : 'idris'})
+  call dein#begin(s:dein_location)
+  call dein#add(s:dein_plugin_path)
+  call dein#add("idris-hackers/idris-vim", {'on_ft' : 'idris'})
   call dein#add("clojure-vim/acid.nvim")
   call dein#add("l04m33/vlime", {'rtp' : 'vim/'})
-	call dein#add("dag/vim-fish")
-	call dein#add("Shougo/deoplete.nvim")
-	call dein#add("Sirver/Ultisnips")
-	call dein#add("honza/vim-snippets")
-	call dein#add("tpope/vim-surround")
-	call dein#add("zeis/vim-kolor")
-	call dein#add("neomake/neomake")
-	call dein#add("skywind3000/asyncrun.vim")
-	call dein#add("Shougo/denite.nvim")
+  call dein#add("dag/vim-fish")
+  call dein#add("Shougo/deoplete.nvim")
+  call dein#add("Sirver/Ultisnips")
+  call dein#add("honza/vim-snippets")
+  call dein#add("tpope/vim-surround")
+  call dein#add("zeis/vim-kolor")
+  call dein#add("neomake/neomake")
+  call dein#add("skywind3000/asyncrun.vim")
+  call dein#add("Shougo/denite.nvim")
   call dein#add("easymotion/vim-easymotion")
   call dein#add("deton/tcvime")
-	call dein#end()
-	call dein#save_state()
+  call dein#add("the-lambda-church/coquille")
+  call dein#add("Yggdroot/indentLine")
+  call dein#end()
+  call dein#save_state()
 endif
 
 filetype plugin indent on
@@ -55,7 +58,6 @@ vnoremap j gj
 nnoremap k gk
 vnoremap k gk
 nnoremap Y y$
-let mapleader='\<Space>'
 " }}}
 
 " code formatting {{{
@@ -131,4 +133,10 @@ function! VlimeBuildConnectorCommandFor_nc(host, port, timeout)
     return ['nc', '-w', string(a:timeout / 1000.0), a:host, string(a:port)]
   endif
 endfunction
+" }}}
+
+" indentLine {{{
+let g:indentLine_color_term = 241
+let g:indentLine_color_gui = '#555555'
+let g:indentLine_char = '│'
 " }}}
