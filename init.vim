@@ -30,6 +30,7 @@ if dein#load_state(s:dein_location)
   call dein#add("Shougo/denite.nvim")
   call dein#add("easymotion/vim-easymotion")
   call dein#add("deton/tcvime")
+  call dein#add("let-def/vimbufsync")
   call dein#add("the-lambda-church/coquille")
   call dein#add("Yggdroot/indentLine")
   call dein#end()
@@ -139,4 +140,13 @@ endfunction
 let g:indentLine_color_term = 241
 let g:indentLine_color_gui = '#555555'
 let g:indentLine_char = '│'
+" }}}
+
+" coquille {{{
+inoremap <C-c><C-n> <C-o>:CoqNext<CR>
+nnoremap <C-c><C-n> :CoqNext<CR>
+inoremap <C-c><C-c> <C-o>:CoqToCursor<CR>
+nnoremap <C-c><C-c> :CoqToCursor<CR>
+inoremap <C-c><C-u> <C-o>:<C-u>CoqUndo<CR>
+nnoremap <C-c><C-u> :<C-u>CoqUndo<CR>
 " }}}
