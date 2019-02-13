@@ -31,7 +31,8 @@ if dein#load_state(s:dein_location)
   call dein#add("easymotion/vim-easymotion")
   call dein#add("deton/tcvime")
   call dein#add("let-def/vimbufsync")
-  call dein#add("the-lambda-church/coquille")
+  " call dein#add("the-lambda-church/coquille")
+  call dein#add("https://framagit.org/tyreunom/coquille.git")
   call dein#add("Yggdroot/indentLine")
   call dein#end()
   call dein#save_state()
@@ -143,6 +144,7 @@ let g:indentLine_char = '│'
 " }}}
 
 " coquille {{{
+call coquille#Commands()
 inoremap <C-c><C-n> <C-o>:CoqNext<CR>
 nnoremap <C-c><C-n> :CoqNext<CR>
 inoremap <C-c><C-c> <C-o>:CoqToCursor<CR>

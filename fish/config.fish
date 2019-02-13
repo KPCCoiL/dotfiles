@@ -7,7 +7,7 @@ case Darwin
   set -gx OCAML_TOPLEVEL_PATH "/Users/akifumi/.opam/system/lib/toplevel";
   set -gx PATH "/usr/local/Cellar/llvm/7.0.0/bin" "/Users/akifumi/.opam/system/bin" "/Users/akifumi/.local/bin" "/Users/akifumi/.cabal/bin" "/Users/akifumi/.rbenv/bin" "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/opt/X11/bin" "/usr/local/texlive/2016/bin/x86_64-darwin" "/Users/akifumi/Documents/programs/Haskell/bins/.cabal-sandbox/bin";
 case Linux
-  set -gx PATH "$HOME/.rakudobrew/bin" "$HOME/.npm-global/bin" $PATH
+  set -gx PATH "$HOME/.local/bin" "$HOME/.rakudobrew/bin" "$HOME/.npm-global/bin" $PATH
 end
 
 alias eit=exit
