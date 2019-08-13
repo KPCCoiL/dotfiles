@@ -152,6 +152,12 @@ inoremap <C-c><C-c> <C-o>:CoqToCursor<CR>
 nnoremap <C-c><C-c> :CoqToCursor<CR>
 inoremap <C-c><C-u> <C-o>:<C-u>CoqUndo<CR>
 nnoremap <C-c><C-u> :<C-u>CoqUndo<CR>
+
+if exists('g:nyaovim_version')
+  hi CheckedByCoq guibg=#333377
+  hi CoqErrorCommand guibg=#AA3333
+  hi CoqErrorCommand guibg=#553333
+endif
 " }}}
 
 " {{{ rainbow
