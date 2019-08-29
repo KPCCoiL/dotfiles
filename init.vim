@@ -34,6 +34,11 @@ if dein#load_state(s:dein_location)
   " call dein#add("the-lambda-church/coquille")
   call dein#add("https://framagit.org/tyreunom/coquille.git")
   call dein#add("Yggdroot/indentLine")
+  call dein#add("autozimu/LanguageClient-neovim", {
+        \ 'rev': 'next',
+        \ 'build': 'bash install.sh',
+        \ })
+  call dein#add("KPCCoiL/katze-nyaovim")
   call dein#end()
   call dein#save_state()
 endif
@@ -157,4 +162,53 @@ if exists('g:nyaovim_version')
   hi CoqErrorCommand guibg=#AA3333
   hi CoqErrorCommand guibg=#553333
 endif
+" }}}
+
+" Katze {{{
+let g:katze_commands = 1
+inoremap <C-s> <C-o>:call katze#sendMath()<CR>
+nnoremap <C-s> :call katze#sendMath()<CR>
+nnoremap <C-q> :call katze#toggleAutoPreview()<CR>
+" }}}
+
+" asyncrun {{{
+let s:build_command = {
+      \   'vim': { '': 'source %' },
+      \   'c': {
+      \     '': 'gcc -DDEBUG -Wall -Wextra % -o %<',
+      \     'debug': 'gcc -DDEBUG -Wall -Wextra % -o %<',
+      \     'release': 'gcc % -Wall -Wextra -O2 -o %<',
+      \     'run': './%<',
+      \   },
+      \   'cpp': {
+      \     '': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % -o %<',
+      \     'debug': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % % -o %<',
+      \     'release': 'g++ -std=c++17 -Wall -Wextra % -O2 -o %<',
+      \     'run': './%<',
+      \   },
+      \   'haskell': {
+      \     '': 'runhaskell -Wall %',
+      \     'build': 'ghc -Wall -O2 % -o %<',
+      \     'run': './%<',
+      \   },
+      \   'perl6': {
+      \     '': 'perl6 %',
+      \     'run': 'perl6 %',
+      \   },
+      \   'tex': { '': 'lualatex %' }
+      \ }
+
+function! s:build_file(opts)
+  write
+  let ft = &filetype
+  if a:opts == []
+    exec 'AsyncRun ' . s:build_command[ft]['']
+  else
+    exec 'AsyncRun ' . join(map(copy(a:opts), 's:build_command[ft][v:val]'), ' && ')
+  endif
+endfunction
+
+command! -nargs=* Build call s:build_file([<f-args>])
+
+let g:asyncrun_open = 8
 " }}}
