@@ -34,6 +34,7 @@ if dein#load_state(s:dein_location)
   " call dein#add("the-lambda-church/coquille")
   call dein#add("https://framagit.org/tyreunom/coquille.git")
   call dein#add("Yggdroot/indentLine")
+  call dein#add("luochen1990/rainbow")
   call dein#add("autozimu/LanguageClient-neovim", {
         \ 'rev': 'next',
         \ 'build': 'bash install.sh',
@@ -164,6 +165,42 @@ if exists('g:nyaovim_version')
 endif
 " }}}
 
+" {{{ rainbow
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+\	'guis': [''],
+\	'cterms': [''],
+\	'operators': '_,_',
+\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+\	'separately': {
+\		'*': {},
+\		'markdown': {
+\			'parentheses_options': 'containedin=markdownCode contained'
+\		},
+\		'lisp': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3']
+\		},
+\		'clojure': {
+\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3']
+\		},
+\		'haskell': {
+\			'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/\v\{\ze[^-]/ end=/}/ fold']
+\		},
+\		'vim': {
+\			'parentheses_options': 'containedin=vimFuncBody'
+\		},
+\		'perl': {
+\			'syn_name_prefix': 'perlBlockFoldRainbow'
+\		},
+\		'stylus': {
+\			'parentheses': ['start=/{/ end=/}/ fold contains=@colorableGroup']
+\		},
+\		'css': 0
+\	}
+\}
+"}}}
 " Katze {{{
 let g:katze_commands = 1
 inoremap <C-s> <C-o>:call katze#sendMath()<CR>
@@ -173,30 +210,30 @@ nnoremap <C-q> :call katze#toggleAutoPreview()<CR>
 
 " asyncrun {{{
 let s:build_command = {
-      \   'vim': { '': 'source %' },
-      \   'c': {
-      \     '': 'gcc -DDEBUG -Wall -Wextra % -o %<',
-      \     'debug': 'gcc -DDEBUG -Wall -Wextra % -o %<',
-      \     'release': 'gcc % -Wall -Wextra -O2 -o %<',
-      \     'run': './%<',
-      \   },
-      \   'cpp': {
-      \     '': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % -o %<',
-      \     'debug': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % % -o %<',
-      \     'release': 'g++ -std=c++17 -Wall -Wextra % -O2 -o %<',
-      \     'run': './%<',
-      \   },
-      \   'haskell': {
-      \     '': 'runhaskell -Wall %',
-      \     'build': 'ghc -Wall -O2 % -o %<',
-      \     'run': './%<',
-      \   },
-      \   'perl6': {
-      \     '': 'perl6 %',
-      \     'run': 'perl6 %',
-      \   },
-      \   'tex': { '': 'lualatex %' }
-      \ }
+     \   'vim': { '': 'source %' },
+     \   'c': {
+     \     '': 'gcc -DDEBUG -Wall -Wextra % -o %<',
+     \     'debug': 'gcc -DDEBUG -Wall -Wextra % -o %<',
+     \     'release': 'gcc % -Wall -Wextra -O2 -o %<',
+     \     'run': './%<',
+     \   },
+     \   'cpp': {
+     \     '': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % -o %<',
+     \     'debug': 'g++ -std=c++17 -DDEBUG -Wall -Wextra % % -o %<',
+     \     'release': 'g++ -std=c++17 -Wall -Wextra % -O2 -o %<',
+     \     'run': './%<',
+     \   },
+     \   'haskell': {
+     \     '': 'runhaskell -Wall %',
+     \     'build': 'ghc -Wall -O2 % -o %<',
+     \     'run': './%<',
+     \   },
+     \   'perl6': {
+     \     '': 'perl6 %',
+     \     'run': 'perl6 %',
+     \   },
+     \   'tex': { '': 'lualatex %' }
+     \ }
 
 function! s:build_file(opts)
   write
