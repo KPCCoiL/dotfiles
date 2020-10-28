@@ -1,0 +1,244 @@
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+hook_add = '''
+function! s:denite_config() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+autocmd FileType denite call <SID>denite_config()
+function! s:denite_line_from_cursor()
+  let line = getcurpos()[1] - 1
+  execute 'Denite line -split=floating -start-filter -cursor-pos=' . line
+endfunction
+nnoremap <silent> <Space>s :<C-u>call <SID>denite_line_from_cursor()<CR>
+nnoremap <silent> <Space>e :<C-u>Denite file -split=floating<CR>
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+
+[[plugins]]
+repo = '~/.fzf'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 0
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo = 'gruvbox-material/vim'
+name = 'gruvbox-material'
+hook_add = '''
+set termguicolors
+set background=dark
+let g:gruvbox_material_background = 'soft'
+colorscheme gruvbox-material
+'''
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+'''
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+hook_add = '''
+let g:rainbow_active = 1
+'''
+
+[[plugins]]
+repo = 'skywind3000/asyncrun.vim'
+hook_add = '''
+let s:build_command = {
+      \   'vim': { '': 'source %' },
+      \   'c': {
+      \     '': 'gcc -DDEBUG -O0 -g -Wall -Wextra % -o %<',
+      \     'build': 'gcc -DDEBUG -O0 -g -Wall -Wextra % -o %<',
+      \     'debug': 'gcc -DDEBUG -O0 -g -Wall -Wextra % -o %<',
+      \     'release': 'gcc % -Wall -Wextra -O2 -o %<',
+      \     'run': './%<',
+      \   },
+      \   'cpp': {
+      \     '': 'g++ -std=c++17 -O0 -g -DDEBUG -Wall -Wextra % -o %<',
+      \     'build': 'g++ -std=c++17 -O0 -g -DDEBUG -Wall -Wextra % -o %<',
+      \     'debug': 'g++ -std=c++17 -O0 -g -DDEBUG -Wall -Wextra % -o %<',
+      \     'release': 'g++ -std=c++17 -Wall -Wextra % -O2 -o %<',
+      \     'run': './%<',
+      \   },
+      \   'haskell': {
+      \     '': 'runhaskell -Wall %',
+      \     'build': 'ghc -Wall -O2 % -o %<',
+      \     'run': './%<',
+      \   },
+      \   'perl6': {
+      \     '': 'perl6 %',
+      \     'run': 'perl6 %',
+      \   },
+      \   'python': {
+      \     '': 'python3 %',
+      \     'run': 'python3 %',
+      \   },
+      \   'tex': { '': 'lualatex %' }
+      \ }
+
+function! s:build_file(opts)
+  write
+  let ft = &filetype
+  if a:opts == []
+    exec 'AsyncRun ' . s:build_command[ft]['']
+  elseif a:opts == ['test']
+    let cmd = "oj test -c '" . s:build_command[ft]['run'] . "'"
+    if has_key(s:build_command[ft], 'build')
+      let cmd = s:build_command[ft]['build'] . ' && ' . cmd
+    endif
+    exec 'AsyncRun ' . cmd
+  elseif a:opts == ['clip']
+    exec 'AsyncRun pbpaste | ' . s:build_command[ft]['run']
+  else
+    exec 'AsyncRun ' . join(map(copy(a:opts), 's:build_command[ft][v:val]'), ' && ')
+  endif
+endfunction
+
+command! -nargs=* Build call <SID>build_file([<f-args>])
+
+let g:asyncrun_open = 8
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'vim-scripts/tinymode.vim'
+
+[[plugins]]
+if = 0
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+if = 0
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+if = 0
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+if = 0
+hook_add = '''
+function! s:register_simple_server(cmd, fts)
+  if executable(a:cmd)
+    call lsp#register_server({
+      \ 'name': a:cmd,
+      \ 'cmd': [a:cmd],
+      \ 'whitelist': a:fts
+    \ })
+  endif
+endfunction
+
+function! s:register_lsp_servers()
+  call s:register_simple_server(
+    \ 'javascript-typescript-stdio',
+    \ ['javascript', 'typescript'])
+  call s:register_simple_server(
+    \ 'ccls',
+    \ ['c', 'cpp'])
+  call s:register_simple_server(
+    \ 'rls',
+    \ ['rust'])
+  if executable('hie-wrapper')
+    call lsp#register_server({
+      \ 'name': 'hie',
+      \ 'cmd': ['hie-wrapper' ,'--lsp'],
+      \ 'whitelist': ['haskell'],
+    \ })
+  endif
+endfunction
+
+augroup lsp_register_server
+  autocmd!
+  autocmd User lsp_setup call s:register_lsp_servers()
+augroup END
+
+function! s:lsp_config()
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> <Space>d <Plug>(lsp-peek-definition)
+  nmap <buffer> <Space>t <Plug>(lsp-peek-type-definition)
+  nmap <buffer> <Space>D <Plug>(lsp-definition)
+  nmap <buffer> <Space>T <Plug>(lsp-type-definition)
+  nmap <buffer> <Space>r <Plug>(lsp-rename)
+  nmap <buffer> K <Plug>(lsp-hover)
+  nmap <buffer> <Space>f <Plug>(lsp-document-format)
+  vmap <buffer> <Space>f <Plug>(lsp-document-range-format)
+  call tinymode#EnterMap('LSPInfo', '<Space>j', 'j')
+  call tinymode#EnterMap('LSPInfo', '<Space>k', 'k')
+  call tinymode#Map('LSPInfo', "j", "LspNextDiagnostic")
+  call tinymode#Map('LSPInfo', "k", "LspPreviousDiagnostic")
+endfunction
+
+augroup lsp_start
+  autocmd!
+  autocmd User lsp_buffer_enabled call s:lsp_config()
+augroup END
+'''
+
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+rev = 'release'
+if = 1
+hook_add = '''
+set cmdheight=2
+set hidden
+
+function! s:hover()
+  if index(['vim', 'help'], &filetype) >= 0
+    execute 'help ' . expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+function! s:coc_config()
+  setlocal signcolumn=yes
+  nmap <Space>d <Plug>(coc-definition)
+  nmap <Space>t <Plug>(coc-type-definition)
+  nmap <Space>r <Plug>(coc-rename)
+  nmap <Space>f <Plug>(coc-format)
+  vmap <Space>f <Plug>(coc-format-selected)
+  nnoremap <silent> <buffer> K :<C-u>call <SID>hover()<CR>
+  call tinymode#EnterMap('CocInfo', '<Space>j', 'j')
+  call tinymode#EnterMap('CocInfo', '<Space>k', 'k')
+  call tinymode#Map('CocInfo', "j", "call CocAction('diagnosticNext')")
+  call tinymode#Map('CocInfo', "k", "call CocAction('diagnosticPrevious')")
+endfunction
+
+augroup coc_start
+  autocmd!
+  autocmd User CocNvimInit call s:coc_config()
+augroup END
+'''
+
+[[plugins]]
+repo = 'MiSawa/sniplate.vim'
+hook_add = '''
+let g:sniplate#sniplates_directory = expand('~/competitive-templates/sniplate')
+'''

@@ -1,0 +1,87 @@
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
+
+[[plugins]]
+repo = 'https://framagit.org/tyreunom/coquille.git'
+on_ft = 'coq'
+
+[[plugins]]
+repo = 'Olical/conjure'
+rev = 'v2.1.2'
+on_ft = 'clojure'
+build = 'bin/compile'
+
+[[plugins]]
+repo = 'idris-hackers/idris-vim'
+on_ft = 'idris'
+
+[[plugins]]
+repo = 'kovisoft/slimv'
+on_ft = ['lisp', 'scheme']
+hook_add = '''
+let g:slimv_swank_cmd = '!~/Applications/iTerm.app/Contents/Resources/it2run ~/Library/ApplicationSupport/iTerm2/Scripts/open-swank.py'
+'''
+
+[[plugins]]
+repo = 'vim-scripts/paredit.vim'
+on_ft = ['clojure']
+
+[[plugins]]
+repo = 'dag/vim-fish'
+on_ft = 'fish'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+if = 0
+on_ft = 'typescript'
+
+[[plugins]]
+repo = 'deton/tcvime'
+on_map = { i = '<Plug>Tcvime' }
+if = 0
+hook_add = '''
+let g:tcvime_keymap = 'tutcodep'
+function! TcvimeCustomKeymap()
+  for s:i in range(1, 9)
+    execute 'lmap <silent> m' . s:i . ' <C-r>=tcvime#InputPostConvert(' . s:i . ', 0)<CR>'
+    execute 'lmap <silent> n' . s:i . ' <C-r>=tcvime#InputPostConvert(' . s:i . ', 1)<CR>'
+  endfor
+endfunction
+
+imap <unique> <C-j><C-j> <Plug>TcvimeIEnableKeymap
+lmap <silent> <unique> <C-j><C-e> <Plug>TcvimeIDisableKeymap
+'''
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_cmd = 'Denite file_mru'
+
+[[plugins]]
+repo = 'sakhnik/nvim-gdb'
+on_ft = ['c', 'cpp']
+build = './install.sh'
+hook_add = '''
+function! s:start_debugger()
+  let executable = expand('%:r')
+  execute 'GdbStartLLDB lldb ' . executable
+endfunction
+
+command! Debug call <SID>start_debugger()
+'''
+
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft = ['tex', 'latex']
+hook_add = '''
+let g:tex_flavor = 'latex'
+'''
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+if = 0
+on_ft = ['python']
+
+[[plugins]]
+repo = 'hylang/vim-hy'
+on_ft = ['hy']
