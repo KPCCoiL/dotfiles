@@ -224,6 +224,9 @@
 (leaf racket-mode
   :ensure t)
 
+(leaf julia-mode
+    :ensure t)
+
 (leaf agda2
   :require t
   :custom (agda2-backend . "GHC")
@@ -249,6 +252,7 @@
            (org-startup-indented . t)
            (org-image-actual-width . 500)
            (org-latex-compiler . "lualatex")
+           (org-latex-pdf-process . '("latexmk -output-directory=%o %f"))
            (org-latex-packages-alist . '(("" "luatexja-fontspec" nil '("lualatex"))))
            (org-latex-default-class . "ltjsarticle")
            (org-latex-prefer-user-labels . t)
@@ -297,9 +301,21 @@
                                       ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
   (add-to-list 'org-src-lang-modes '("Hy" . hy))
   (add-to-list 'org-babel-load-languages '(python . t))
-  (org-babel-do-load-languages 'org-babel-load-languages '((python . t)))
+  (add-to-list 'org-babel-load-languages '(gnuplot . t))
+  (add-to-list 'org-babel-load-languages '(shell . t))
+  (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t)))
   (leaf ox-latex-subfigure
-      :ensure t))
+      :ensure t
+      :require t
+      :after org)
+  (leaf org-ref
+      :ensure t
+      :require t
+      :after org
+      :pre-setq (org-ref-completion-library . 'org-ref-ivy-cite)
+      :custom ((reftex-default-bibliography . '("~/Documents/bibliography/references.bib"))
+               (org-ref-bibliography-notes . "~/Documents/bibliography/bibliography-notes.org")
+               (org-ref-pdf-directory . "~/Documents/bibliography/bibtex-pdfs"))))
 
 (leaf auctex
   :ensure t
@@ -310,7 +326,7 @@
 
 (leaf paredit
   :ensure t
-  :hook ((lisp-mode-hook emacs-lisp-mode-hook ielm-mode-hook hy-mode-hook racket-mode-hook racket-repl-mode-hook) . enable-paredit-mode))
+  :hook ((lisp-mode-hook emacs-lisp-mode-hook ielm-mode-hook hy-mode-hook scheme-mode-hook racket-mode-hook racket-repl-mode-hook) . enable-paredit-mode))
 
 (leaf doc-view
   :tag "builtin"
