@@ -10,6 +10,8 @@
 
   (leaf leaf-keywords
     :ensure t
+    :init
+    (leaf el-get :ensure t)
     :config
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
@@ -126,7 +128,7 @@
 
 (leaf lsp-mode
   :ensure t
-  :hook (((python-mode-hook c-mode-hook c++-mode-hook LaTeX-mode-hook haskell-mode-hook) . lsp)
+  :hook (((python-mode-hook c-mode-hook c++-mode-hook LaTeX-mode-hook haskell-mode-hook julia-mode-hook) . lsp)
          (lsp-mode-hook . lsp-enable-which-key-integration))
   :config
   (leaf lsp-ui
@@ -134,7 +136,9 @@
   (leaf lsp-latex
     :ensure t
     :require t
-    :custom ((lsp-latex-build-on-save . t))))
+    :custom ((lsp-latex-build-on-save . t)))
+  (leaf lsp-julia
+      :ensure t))
 
 (leaf company
   :ensure t
@@ -224,8 +228,19 @@
 (leaf racket-mode
   :ensure t)
 
-(leaf julia-mode
+(leaf plisp-mode
     :ensure t)
+
+(leaf ess
+    :ensure t)
+
+(leaf julia-mode
+    :ensure t
+    :config
+    (leaf ob-julia
+        :el-get (ob-julia
+                 :url "https://git.nixo.xyz/nixo/ob-julia.git")
+        :after ess-inf))
 
 (leaf agda2
   :require t
@@ -303,7 +318,11 @@
   (add-to-list 'org-babel-load-languages '(python . t))
   (add-to-list 'org-babel-load-languages '(gnuplot . t))
   (add-to-list 'org-babel-load-languages '(shell . t))
-  (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t)))
+  (add-to-list 'org-babel-load-languages '(picolisp . t))
+  (add-to-list 'org-babel-load-languages '(scheme . t))
+  (add-to-list 'org-babel-load-languages '(julia . t))
+  (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
+                                                           (scheme . t) (julia . t)))
   (leaf ox-latex-subfigure
       :ensure t
       :require t
