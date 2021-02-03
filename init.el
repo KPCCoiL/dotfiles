@@ -244,7 +244,7 @@
 
 (leaf agda2
   :require t
-  :if (string= (system-name) "SilverShield.local")
+  :if (string= (system-name) "SilverShield")
   :custom (agda2-backend . "GHC")
   :load-path `(,(let* ((coding-system-for-read 'utf-8))
                   (substring
@@ -413,7 +413,7 @@
                            (left . 200)
                            (top . 30)
                            (font . "Ricty Diminished Discord 14")))
-        ("SilverShield.local" '((width . 125)
+        ("SilverShield" '((width . 125)
                                 (height . 60)
                                 (left . 500)
                                 (top . 50)
