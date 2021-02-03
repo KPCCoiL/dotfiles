@@ -244,6 +244,7 @@
 
 (leaf agda2
   :require t
+  :if (string= (system-name) "SilverShield.local")
   :custom (agda2-backend . "GHC")
   :load-path `(,(let* ((coding-system-for-read 'utf-8))
                   (substring
@@ -399,17 +400,25 @@
 
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
+(when (string= (system-name) "StellarDagger")
+  (menu-bar-mode -1))
 (setf inhibit-startup-screen t)
 (setq-default indent-tabs-mode nil)
 (electric-pair-mode 1)
 (setf backup-directory-alist '(("." . "~/.emacs-backup")))
 (setf default-frame-alist
-      '((width . 125)
-        (height . 60)
-        (left . 500)
-        (top . 50)
-        (font . "Menlo 14")))
-(set-face-attribute 'default t :font "Menlo 10")
+      (pcase (system-name)
+        ("StellarDagger" '((width . 125)
+                           (height . 35)
+                           (left . 200)
+                           (top . 30)
+                           (font . "Ricty Diminished Discord 14")))
+        ("SilverShield.local" '((width . 125)
+                                (height . 60)
+                                (left . 500)
+                                (top . 50)
+                                (font . "Menlo 14")))))
+;(set-face-attribute 'default t :font "Menlo 10")
 (server-start)
 (setf lisp-indent-function 'common-lisp-indent-function)
 
