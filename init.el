@@ -231,16 +231,24 @@
 (leaf plisp-mode
     :ensure t)
 
+(leaf ein
+    :ensure t
+    :custom ((ein:output-area-inlined-images . t)))
+
 (leaf ess
-    :ensure t)
+    :ensure t
+    :custom (tab-always-indent . 'complete))
 
 (leaf julia-mode
     :ensure t
     :config
-    (leaf ob-julia
-        :el-get (ob-julia
-                 :url "https://git.nixo.xyz/nixo/ob-julia.git")
-        :after ess-inf))
+    (leaf julia-vterm
+        :ensure t
+        :hook (julia-mode-hook . julia-vterm-mode))
+    (leaf ob-julia-vterm
+        :el-get (ob-julia-vterm
+                 :url "https://github.com/shg/ob-julia-vterm.el.git")
+        :after julia-vterm))
 
 (leaf agda2
   :require t
@@ -321,9 +329,11 @@
   (add-to-list 'org-babel-load-languages '(shell . t))
   (add-to-list 'org-babel-load-languages '(picolisp . t))
   (add-to-list 'org-babel-load-languages '(scheme . t))
-  (add-to-list 'org-babel-load-languages '(julia . t))
+  (add-to-list 'org-babel-load-languages '(julia-vterm . t))
+  ;(add-to-list 'org-babel-load-languages '(julia . t))
+  (add-to-list 'org-babel-load-languages '(ein . t))
   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
-                                                           (scheme . t) (julia . t)))
+                                                           (scheme . t) (julia-vterm . t) (ein . t)))
   (leaf ox-latex-subfigure
       :ensure t
       :require t
