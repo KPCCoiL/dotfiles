@@ -373,6 +373,10 @@
     :tag "builtin"
     :global-minor-mode global-auto-revert-mode)
 
+(leaf recentf
+    :tag "builtin"
+    :global-minor-mode recentf-mode)
+
 (leaf display-line-numbers
   :tag "builtin"
   :global-minor-mode global-display-line-numbers-mode)
