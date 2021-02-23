@@ -167,6 +167,14 @@
   :custom ((ivy-use-virtual-buffers . t)
            (ivy-count-format . "%d/%d "))
   :global-minor-mode ivy-mode
+  :bind ((:evil-motion-state-map
+          :package evil
+          ("/" . swiper-isearch-save-direction)
+          ("?" . swiper-isearch-backward-save-direction)
+          ("SPC f" . counsel-find-file)
+          ("SPC F" . counsel-dired-file)
+          ("SPC b" . counsel-switch-buffer)
+          ("SPC h" . counsel-recentf)))
   :config
   (leaf ivy-hydra
       :ensure t)
@@ -179,15 +187,13 @@
     "swiper-isearch-backward which saves its direction to isearch-forward"
     (interactive)
     (swiper-isearch-backward initial-input)
-    (setf isearch-forward nil))
-  (evil-global-set-key 'motion (kbd "/") 'swiper-isearch-save-direction)
-  (evil-global-set-key 'motion (kbd "?") 'swiper-isearch-backward-save-direction)
-  (evil-global-set-key 'motion (kbd "SPC f") 'counsel-find-file)
-  (evil-global-set-key 'motion (kbd "SPC F") 'counsel-dired-file)
-  (evil-global-set-key 'motion (kbd "SPC b") 'counsel-switch-buffer))
+    (setf isearch-forward nil)))
 
 (leaf magit
     :ensure t
+    :bind ((:evil-motion-state-map
+            :package evil
+            ("SPC g" . magit-status)))
     :config
     (leaf evil-magit
         :ensure t
@@ -263,6 +269,13 @@
                              (setenv "GHC_ENVIRONMENT" "agda")
                              (set-input-method "Agda"))))
 
+(leaf asy-mode
+    :if (string= (system-name) "SilverShield")
+    :load-path "/usr/local/texlive/2020/texmf-dist/asymptote/"
+    :commands (asy-mode lasy-mode asy-insinuate-latex)
+    :config
+    (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+
 (leaf gnuplot
     :ensure t
     :commands (gnuplot-mode gnuplot-make-buffer)
@@ -332,10 +345,13 @@
   (add-to-list 'org-babel-load-languages '(julia-vterm . t))
   ;(add-to-list 'org-babel-load-languages '(julia . t))
   (add-to-list 'org-babel-load-languages '(ein . t))
+  (add-to-list 'org-babel-load-languages '(asymptote . t))
   (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
-                                                           (scheme . t) (julia-vterm . t) (ein . t)))
+                                                           (scheme . t) (julia-vterm . t) (ein . t) (asymptote . t)))
   (leaf ox-latex-subfigure
-      :ensure t
+      :el-get (ox-latex-subfigure
+               :url "https://github.com/KPCCoiL/ox-latex-subfigure.git"
+               :branch "center-subfigure")
       :require t
       :after org)
   (leaf org-ref
