@@ -320,11 +320,7 @@ mysterious warning shows up.
       :ensure t
       :bind ((:evil-motion-state-map
               :package evil
-              ("SPC g" . magit-status)))
-      :config
-      (leaf evil-magit
-          :ensure t
-          :require t))
+              ("SPC g" . magit-status))))
 #+END_SRC
 ** vterm
 #+BEGIN_SRC emacs-lisp
