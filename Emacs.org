@@ -524,7 +524,6 @@ Let's org'anize everything.
              :package evil
              ("SPC a" . org-agenda))
       :config
-      (defvar org-config-executed t)
       (with-eval-after-load 'ox-latex
         (add-to-list 'org-latex-classes '("ltjsarticle" "\\documentclass[11pt]{ltjsarticle}"
                                           ("\\section{%s}" . "\\section*{%s}")
