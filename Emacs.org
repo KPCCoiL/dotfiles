@@ -578,7 +578,7 @@ Let's org'anize everything.
     (find-file "~/dotfiles/Emacs.org"))
 #+END_SRC
 ** default-directory
-On macOS, Emacs launched from , say, Dock, has ~default-directort~ ~/~.
+On macOS, Emacs launched from, say, Dock, has ~default-directory~ ~/~.
 #+BEGIN_SRC emacs-lisp
   (when (equal default-directory "/")
     (setf default-directory "~"))
