@@ -538,7 +538,6 @@ Let's org'anize everything.
       (add-to-list 'org-babel-load-languages '(picolisp . t))
       (add-to-list 'org-babel-load-languages '(scheme . t))
       (add-to-list 'org-babel-load-languages '(julia-vterm . t))
-                                          ;(add-to-list 'org-babel-load-languages '(julia . t))
       (add-to-list 'org-babel-load-languages '(ein . t))
       (add-to-list 'org-babel-load-languages '(asymptote . t))
       (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
