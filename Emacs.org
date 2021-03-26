@@ -402,6 +402,11 @@ As far as I tried so far =ob-julia-vterm= seems to be the best Julia-Babel integ
 #+BEGIN_SRC emacs-lisp
   (setf lisp-indent-function 'common-lisp-indent-function)
 #+END_SRC
+*** Scheme
+#+begin_src emacs-lisp
+  (leaf geiser
+      :ensure t)
+#+end_src
 *** Hy
 #+BEGIN_SRC emacs-lisp
   (leaf hy-mode
