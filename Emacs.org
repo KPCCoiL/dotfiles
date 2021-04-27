@@ -1,5 +1,6 @@
 #+TITLE: init.org
 #+PROPERTY: header-args:emacs-lisp :tangle yes
+#+STARTUP: overview
 
 * Initialization
 ** leaf.el
@@ -273,6 +274,13 @@ Emacs is too hard to live in without this.
 #+BEGIN_SRC emacs-lisp
   (setf backup-directory-alist '(("." . "~/.emacs-backup")))
 #+END_SRC
+** dired
+Typing =gr= each time you move is cumbersome.
+#+begin_src emacs-lisp
+  (leaf dired
+      :tag "builtin"
+      :custom (dired-auto-revert-buffer . t))
+#+end_src
 * General coding facilities
 ** lsp-mode
 #+BEGIN_SRC emacs-lisp
@@ -418,13 +426,24 @@ As far as I tried so far =ob-julia-vterm= seems to be the best Julia-Babel integ
 #+END_SRC
 *** Common Lisp
 sly from roswell.
+Currently disabled for interference with ~plisp-mode~.
+I have to investigate more seriously when I want to try both.
 #+BEGIN_SRC emacs-lisp
-  (load (expand-file-name "~/.roswell/helper.el"))
+  ; (load (expand-file-name "~/.roswell/helper.el"))
 #+END_SRC
 *** Picolisp
+The extension ~.l~ should be associated with this one.
 #+BEGIN_SRC emacs-lisp
   (leaf plisp-mode
-      :ensure t)
+      :ensure t
+      :custom ((plisp-documentation-directory . "~/.local/share/doc/picolisp/")
+               (plisp-pilindent-executable . "~/.local/bin/pilIndent")
+               (plisp-pil-executable . "~/.local/bin/pil"))
+      :config
+      (setq auto-mode-alist
+            (remove-if (lambda (p) (string= (car p) "\\.l\\'"))
+                       auto-mode-alist))
+      (add-to-list 'auto-mode-alist '("\\.l\\'" . plisp-mode)))
 #+END_SRC
 ** Asymptote
 #+BEGIN_SRC emacs-lisp
