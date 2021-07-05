@@ -545,7 +545,16 @@ Let's org'anize everything.
                                              :html-foreground "Black"
                                              :html-background "Transparent"
                                              :html-scale 1.0
-                                             :matchers ("begin" "$1" "$" "$$" "\\(" "\\["))))
+                                             :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
+               (org-latex-listings . t)
+               (org-latex-listings-options .
+                                           '(("basicstyle"  "\\fontspec{RictyDiminished-Discord}")
+                                             ("keywordstyle" "{\\fontspec{RictyDiminishedDiscord-Bold}[Color=blue]}")
+                                             ("commentstyle" "{\\fontspec{RictyDiminishedDiscord-Oblique}[Color=green]}")
+                                             ("stringstyle" "\\color{orange}")
+                                             ("postbreak" "↳\\space")
+                                             ("frame" "single")
+                                             ("breaklines" "true"))))
       :hook (org-mode-hook . (lambda ()
                                (set (make-local-variable 'company-backends) '((company-dabbrev company-yasnippet)))))
       :bind (:evil-motion-state-map
