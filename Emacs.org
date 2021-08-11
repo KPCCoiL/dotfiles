@@ -485,7 +485,10 @@ I'll face it when the time comes.
 ** Haskell
 #+BEGIN_SRC emacs-lisp
   (leaf haskell-mode
-      :ensure t)
+      :ensure t
+      :config
+      (leaf lsp-haskell
+          :after lsp-mode))
 #+END_SRC
 ** Agda
 In case I felt like.
