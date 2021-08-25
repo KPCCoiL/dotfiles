@@ -491,22 +491,6 @@ I'll face it when the time comes.
           :ensure t
           :after lsp-mode))
 #+END_SRC
-** Agda
-In case I felt like.
-#+BEGIN_SRC emacs-lisp
-  (leaf agda2
-      :require t
-      :if +on-silvershield+
-      :custom (agda2-backend . "GHC")
-      :load-path `(,(let* ((coding-system-for-read 'utf-8))
-                      (substring
-                       (shell-command-to-string "agda-mode locate")
-                       0
-                       (- (length "/agda2.el")))))
-      :hook (agda2-mode-hook . (lambda ()
-                                 (setenv "GHC_ENVIRONMENT" "agda")
-                                 (set-input-method "Agda"))))
-#+END_SRC
 * Org
 Let's org'anize everything.
 #+BEGIN_SRC emacs-lisp
