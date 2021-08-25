@@ -488,6 +488,7 @@ I'll face it when the time comes.
       :ensure t
       :config
       (leaf lsp-haskell
+          :ensure t
           :after lsp-mode))
 #+END_SRC
 ** Agda
