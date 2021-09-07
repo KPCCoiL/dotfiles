@@ -502,7 +502,8 @@ Let's org'anize everything.
   (leaf org
       :tag "builtin"
       :after yasnippet company
-      :custom ((org-startup-truncated . nil)
+      :custom ((org-agenda-files . "~/.emacs.d/org-agenda")
+               (org-startup-truncated . nil)
                (org-startup-indented . t)
                (org-image-actual-width . 500)
                (org-latex-compiler . "lualatex")
@@ -614,6 +615,5 @@ On macOS, Emacs launched from, say, Dock, has ~default-directory~ ~/~.
 ** custom-file
 Nobody wants their ~init.el~ messed up.
 #+BEGIN_SRC emacs-lisp
-  (setf custom-file "~/.emacs.d/custom.el")
-  (load-file custom-file)
+  (setf custom-file null-device)
 #+END_SRC
