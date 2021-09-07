@@ -9,12 +9,13 @@ Packages are to be manages by =leaf.el=.
   (eval-and-compile
     (customize-set-variable
      'package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("gnu" . "https://elpa.gnu.org/packages/")))
+                         ("gnu" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/")))
     (package-initialize)
     (unless (package-installed-p 'leaf)
       (package-refresh-contents)
       (package-install 'leaf))
-
+  
     (leaf leaf-keywords
       :ensure t
       :init
@@ -22,7 +23,7 @@ Packages are to be manages by =leaf.el=.
       :config
       ;; initialize leaf-keywords.el
       (leaf-keywords-init)))
-
+  
   (leaf leaf-tree :ensure t)
   (leaf leaf-convert :ensure t)
 #+END_SRC
