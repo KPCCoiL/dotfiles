@@ -8,9 +8,8 @@ Packages are to be manages by =leaf.el=.
 #+BEGIN_SRC emacs-lisp
   (eval-and-compile
     (customize-set-variable
-     'package-archives '(("org" . "https://orgmode.org/elpa/")
-			 ("melpa" . "https://melpa.org/packages/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+     'package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("gnu" . "https://elpa.gnu.org/packages/")))
     (package-initialize)
     (unless (package-installed-p 'leaf)
       (package-refresh-contents)
@@ -23,7 +22,7 @@ Packages are to be manages by =leaf.el=.
       :config
       ;; initialize leaf-keywords.el
       (leaf-keywords-init)))
-      
+
   (leaf leaf-tree :ensure t)
   (leaf leaf-convert :ensure t)
 #+END_SRC
