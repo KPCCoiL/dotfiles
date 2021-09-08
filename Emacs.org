@@ -573,6 +573,11 @@ Let's org'anize everything.
       (add-to-list 'org-babel-load-languages '(asymptote . t))
       (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
                                                                (scheme . t) (julia-vterm . t) (ein . t) (asymptote . t)))
+      (leaf org-contrib
+          :ensure t
+          :require ox-extra
+          :config
+          (ox-extras-activate '(ignore-headlines)))
       (leaf ox-latex-subfigure
           :el-get (ox-latex-subfigure
                    :url "https://github.com/KPCCoiL/ox-latex-subfigure.git"
