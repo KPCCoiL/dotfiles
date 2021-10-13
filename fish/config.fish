@@ -5,7 +5,8 @@ case Darwin
   set -gx MANPATH "/Users/akifumi/.opam/system/man" "";
   set -gx PERL5LIB "/Users/akifumi/.opam/system/lib/perl5";
   set -gx OCAML_TOPLEVEL_PATH "/Users/akifumi/.opam/system/lib/toplevel";
-  set -gx PATH "/Users/akifumi/.opam/system/bin" "/Users/akifumi/.local/bin" "/Users/akifumi/.cabal/bin" "/Users/akifumi/.rbenv/bin" "/usr/local/bin" "/usr/bin" "/bin" "/usr/sbin" "/sbin" "/opt/X11/bin" "/usr/local/texlive/2018/bin/x86_64-darwin" "/Users/akifumi/Documents/programs/Haskell/bins/.cabal-sandbox/bin";# "/usr/local/Cellar/llvm/7.0.0/bin";
+  set -x LSCOLORS "gxfxcxdxbxegedabagacad"
+  source ~/.iterm2_shell_integration.fish
 end
 
 alias eit=exit
@@ -13,6 +14,8 @@ alias :q=exit
 alias awk=gawk
 
 fish_vi_key_bindings
+bind -M insert \cl "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
+bind -M visual \cl "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
 
 function fish_right_prompt
   set_color green
