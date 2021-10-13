@@ -81,6 +81,7 @@ Be evil.
     (leaf evil-collection
       :ensure t
       :require t
+      :custom (evil-collection-key-blacklist . '("C-l"))
       :config (evil-collection-init))
     (leaf evil-surround
       :ensure t
@@ -254,9 +255,6 @@ Emacs is too hard to live in without this.
       :require em-alias
       :custom ((eshell-cmpl-ignore-case . t))
       :defun (new-shell-in-tab)
-      :bind ((:evil-motion-state-map
-              :package evil
-              ("SPC t" . new-shell-in-tab)))
       :config
       (eshell/alias "ll" "ls -la $*")
       (eshell/alias "la" "ls -a $*")
@@ -343,6 +341,7 @@ mysterious warning shows up.
 #+BEGIN_SRC emacs-lisp
   (leaf vterm
       :ensure t
+      :after evil-collection
       :bind ((:evil-motion-state-map
               :package evil
               ("SPC r" . vterm-repl)))
@@ -350,7 +349,12 @@ mysterious warning shows up.
       (defun vterm-repl (command)
         (interactive "sREPL command: ")
         (let ((vterm-shell command))
-          (vterm))))
+          (multi-vterm)))
+      (leaf multi-vterm
+          :ensure t
+          :bind (:evil-motion-state-map
+                 :package evil
+                 ("SPC t" . multi-vterm))))
 #+END_SRC
 ** parentheses
 #+BEGIN_SRC emacs-lisp
