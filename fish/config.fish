@@ -13,39 +13,11 @@ alias eit=exit
 alias :q=exit
 alias awk=gawk
 
-fish_vi_key_bindings
-bind -M insert \cl "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
-bind -M visual \cl "if commandline -P; commandline -f cancel; else; set fish_bind_mode default; commandline -f backward-char force-repaint; end"
+fish_config prompt choose arrow
+fish_default_key_bindings
 
-function fish_right_prompt
-  set_color green
-  printf '%s' (prompt_pwd)
-  set_color normal
-end
-
-function fish_prompt
-end
-
-function fish_mode_prompt
-  switch $fish_bind_mode
-  case default
-    set_color --bold bryellow
-    printf '⟂'
-  case insert
-    set_color --bold brcyan
-    printf '⁁'
-  case visual
-    set_color  brred
-    printf '◉'
-  case replace_one
-    set_color --bold brgreen
-    printf '⟲'
-  case paste
-    set_color brblack
-    printf '⬇'
-end
-printf ' ∞ '
-set_color normal
+if set -q INSIDE_EMACS
+   source $EMACS_VTERM_PATH/etc/emacs-vterm.fish
 end
 
 thefuck --alias | source
