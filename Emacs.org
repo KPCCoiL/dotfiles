@@ -155,20 +155,13 @@ Let's have it behave like Vim's tabs.
 
 * Visual stuffs
 ** color theme
-I'm switching to Tomorrow.
-Until I make up my mind I'll leave gruvbox installed.
+~(color-theme-sanityinc-tomorrow-eighties)~ doesn't prevent asking me "Are you sure?"
 #+BEGIN_SRC emacs-lisp
-  (leaf gruvbox-theme
-    :ensure t
-    :if nil
-    :config
-    (load-theme 'gruvbox-dark-soft t))
-
   (leaf color-theme-sanityinc-tomorrow
       :ensure t
       :require t
       :config
-      (color-theme-sanityinc-tomorrow-eighties))
+      (load-theme 'sanityinc-tomorrow-eighties t))
 #+END_SRC
 ** hide tool bar etc.
 #+BEGIN_SRC emacs-lisp
