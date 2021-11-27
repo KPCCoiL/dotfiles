@@ -406,6 +406,12 @@ As far as I tried so far =ob-julia-vterm= seems to be the best Julia-Babel integ
   (leaf go-mode
       :ensure t)
 #+end_src
+** Fish
+Although there is some support in ~sh-mode~, it does not behave well overall.
+#+begin_src emacs-lisp
+  (leaf fish-mode
+      :ensure t)
+#+end_src
 ** Lisps
 *** paredit
 #+BEGIN_SRC emacs-lisp
