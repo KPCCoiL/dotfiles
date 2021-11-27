@@ -117,38 +117,39 @@ Let's have it behave like Vim's tabs.
       :ensure t
       :require t
       :after evil
-      :custom ((eyebrowse-wrap-around . t))
+      :custom ((eyebrowse-wrap-around . t)
+               (eyebrowse-new-workspace . t))
       :bind ((:evil-motion-state-map
-	      :package evil
-	      ("g t" . eyebrowse-next-window-config)
-	      ("g T" . eyebrowse-prev-window-config)
-	      ("SPC 0" . eyebrowse-switch-to-window-config-0)
-	      ("SPC 1" . eyebrowse-switch-to-window-config-1)
-	      ("SPC 2" . eyebrowse-switch-to-window-config-2)
-	      ("SPC 3" . eyebrowse-switch-to-window-config-3)
-	      ("SPC 4" . eyebrowse-switch-to-window-config-4)
-	      ("SPC 5" . eyebrowse-switch-to-window-config-5)
-	      ("SPC 6" . eyebrowse-switch-to-window-config-6)
-	      ("SPC 7" . eyebrowse-switch-to-window-config-7)
-	      ("SPC 8" . eyebrowse-switch-to-window-config-8)
-	      ("SPC 9" . eyebrowse-switch-to-window-config-9)
-	      ("SPC w" . eyebrowse-switch-to-window-config)
-	      ("SPC W" . eyebrowse-create-window-config)
-	      ("SPC C-w" . eyebrowse-create-named-window-config))
-	     (:evil-normal-state-map
-	       :package evil
-	       ("g t" . eyebrowse-next-window-config)
-	       ("g T" . eyebrowse-prev-window-config)))
+              :package evil
+              ("g t" . eyebrowse-next-window-config)
+              ("g T" . eyebrowse-prev-window-config)
+              ("SPC 0" . eyebrowse-switch-to-window-config-0)
+              ("SPC 1" . eyebrowse-switch-to-window-config-1)
+              ("SPC 2" . eyebrowse-switch-to-window-config-2)
+              ("SPC 3" . eyebrowse-switch-to-window-config-3)
+              ("SPC 4" . eyebrowse-switch-to-window-config-4)
+              ("SPC 5" . eyebrowse-switch-to-window-config-5)
+              ("SPC 6" . eyebrowse-switch-to-window-config-6)
+              ("SPC 7" . eyebrowse-switch-to-window-config-7)
+              ("SPC 8" . eyebrowse-switch-to-window-config-8)
+              ("SPC 9" . eyebrowse-switch-to-window-config-9)
+              ("SPC w" . eyebrowse-switch-to-window-config)
+              ("SPC W" . eyebrowse-create-window-config)
+              ("SPC C-w" . eyebrowse-create-named-window-config))
+             (:evil-normal-state-map
+               :package evil
+               ("g t" . eyebrowse-next-window-config)
+               ("g T" . eyebrowse-prev-window-config)))
       :global-minor-mode eyebrowse-mode
       :config
       (defun find-file-in-new-workspace (file)
-	(interactive "Gfind file in tab: ")
-	(eyebrowse-create-window-config)
-	(find-file file))
+        (interactive "Gfind file in tab: ")
+        (eyebrowse-create-window-config)
+        (find-file file))
       (evil-define-command evil-eyebrowse-tabedit (file)
-			  :repeat nil
-			  (interactive "<f>")
-			  (find-file-in-new-workspace file))
+                          :repeat nil
+                          (interactive "<f>")
+                          (find-file-in-new-workspace file))
       (evil-ex-define-cmd "tabnew" 'eyebrowse-create-window-config)
       (evil-ex-define-cmd "tabe[dit]" 'find-file-in-new-workspace))
 #+END_SRC
