@@ -23,3 +23,9 @@ end
 if type -q thefuck
     thefuck --alias | source
 end
+
+# pyenv
+# .pyenv/shims is already in $PATH through $fish_user_paths
+if status is-interactive
+    pyenv init - | source
+end
