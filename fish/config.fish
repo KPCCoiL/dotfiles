@@ -20,4 +20,6 @@ if set -q INSIDE_EMACS
    source $EMACS_VTERM_PATH/etc/emacs-vterm.fish
 end
 
-thefuck --alias | source
+if type -q thefuck
+    thefuck --alias | source
+end
