@@ -276,11 +276,15 @@ Emacs is too hard to live in without this.
   (setf backup-directory-alist '(("." . "~/.emacs-backup")))
 #+END_SRC
 ** dired
-Typing =gr= each time you move is cumbersome.
+- Typing =gr= each time you move is cumbersome.
+- ~ls~ on macOS does not support ~ls --dired~.
 #+begin_src emacs-lisp
   (leaf dired
       :tag "builtin"
-      :custom (dired-auto-revert-buffer . t))
+      :custom (dired-auto-revert-buffer . t)
+      :config
+      (when +on-silvershield+
+        (setq insert-directory-program "gls")))
 #+end_src
 * General coding facilities
 ** lsp-mode
