@@ -435,7 +435,14 @@ Although there is some support in ~sh-mode~, it does not behave well overall.
 *** Scheme
 #+begin_src emacs-lisp
   (leaf geiser
-      :ensure t)
+      :ensure t
+      :config
+      (leaf geiser-guile
+          :ensure t)
+      (leaf geiser-gauche
+          :ensure t)
+      (leaf geiser-kawa
+          :ensure t))
 #+end_src
 *** Hy
 #+BEGIN_SRC emacs-lisp
