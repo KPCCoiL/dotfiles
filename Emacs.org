@@ -442,6 +442,8 @@ Although there is some support in ~sh-mode~, it does not behave well overall.
       (leaf geiser-gauche
           :ensure t)
       (leaf geiser-kawa
+          :ensure t)
+      (leaf geiser-chicken
           :ensure t))
 #+end_src
 *** Hy
