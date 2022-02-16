@@ -403,7 +403,11 @@ As far as I tried so far =ob-julia-vterm= seems to be the best Julia-Babel integ
 #+BEGIN_SRC emacs-lisp
   (leaf ein
       :ensure t
+      :if nil
       :custom ((ein:output-area-inlined-images . t)))
+
+  (leaf jupyter
+      :ensure t)
 #+END_SRC
 ** Go
 #+begin_src emacs-lisp
@@ -586,10 +590,10 @@ Let's org'anize everything.
       (add-to-list 'org-babel-load-languages '(picolisp . t))
       (add-to-list 'org-babel-load-languages '(scheme . t))
       (add-to-list 'org-babel-load-languages '(julia-vterm . t))
-      (add-to-list 'org-babel-load-languages '(ein . t))
       (add-to-list 'org-babel-load-languages '(asymptote . t))
+      (add-to-list 'org-babel-load-languages '(jupyter . t))
       (org-babel-do-load-languages 'org-babel-load-languages '((python . t) (gnuplot . t) (shell . t) (picolisp . t)
-                                                               (scheme . t) (julia-vterm . t) (ein . t) (asymptote . t)))
+                                                               (scheme . t) (julia-vterm . t) (jupyter . t) (asymptote . t)))
       (leaf org-contrib
           :ensure t
           :require ox-extra
