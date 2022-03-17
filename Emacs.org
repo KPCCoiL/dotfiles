@@ -440,6 +440,7 @@ Although there is some support in ~sh-mode~, it does not behave well overall.
 #+begin_src emacs-lisp
   (leaf geiser
       :ensure t
+      :custom ((geiser-default-implementation . 'guile))
       :config
       (leaf geiser-guile
           :ensure t)
