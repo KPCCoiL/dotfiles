@@ -451,36 +451,6 @@ Although there is some support in ~sh-mode~, it does not behave well overall.
       (leaf geiser-chicken
           :ensure t))
 #+end_src
-*** Hy
-#+BEGIN_SRC emacs-lisp
-  (leaf hy-mode
-      :ensure t
-      :hook (hy-mode-hook . (lambda ()
-                              (evil-local-set-key 'motion
-                                                  "SPC i"
-                                                  'hy-jedhy-update-imports))))
-#+END_SRC
-*** Common Lisp
-sly from roswell.
-Currently disabled for interference with ~plisp-mode~.
-I have to investigate more seriously when I want to try both.
-#+BEGIN_SRC emacs-lisp
-  ; (load (expand-file-name "~/.roswell/helper.el"))
-#+END_SRC
-*** Picolisp
-The extension ~.l~ should be associated with this one.
-#+BEGIN_SRC emacs-lisp
-  (leaf plisp-mode
-      :ensure t
-      :custom ((plisp-documentation-directory . "~/.local/share/doc/picolisp/")
-               (plisp-pilindent-executable . "~/.local/bin/pilIndent")
-               (plisp-pil-executable . "~/.local/bin/pil"))
-      :config
-      (setq auto-mode-alist
-            (remove-if (lambda (p) (string= (car p) "\\.l\\'"))
-                       auto-mode-alist))
-      (add-to-list 'auto-mode-alist '("\\.l\\'" . plisp-mode)))
-#+END_SRC
 ** Asymptote
 #+BEGIN_SRC emacs-lisp
   (leaf asy-mode
