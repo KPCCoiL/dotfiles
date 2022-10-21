@@ -244,35 +244,6 @@ Emacs is too hard to live in without this.
       :tag "builtin"
       :global-minor-mode recentf-mode)
 #+END_SRC
-** eshell
-#+BEGIN_SRC emacs-lisp
-  (leaf eshell
-      :tag "builtin"
-      :require em-alias
-      :custom ((eshell-cmpl-ignore-case . t))
-      :defun (new-shell-in-tab)
-      :config
-      (eshell/alias "ll" "ls -la $*")
-      (eshell/alias "la" "ls -a $*")
-      (eshell/alias "l" "ls -la $*")
-      (eshell/alias "emacs" "find-file $1")
-      (eshell/alias "tabedit" "evil-eyebrowse-tabedit $1")
-      (defun new-shell (&optional start-directory)
-        "Opens a fresh eshell."
-        (interactive)
-        (let ((start-dir (or start-directory default-directory))
-              (shell-buffer (eshell 'N)))
-          (with-current-buffer shell-buffer
-            (eshell-return-to-prompt)
-            (insert (concat "cd " start-dir))
-            (eshell-send-input))))
-      (defun new-shell-in-tab ()
-        "Opens a fresh eshell in a new window config."
-        (interactive)
-        (let ((dir default-directory))
-          (eyebrowse-create-window-config)
-          (new-shell dir))))
-#+END_SRC
 ** backups
 #+BEGIN_SRC emacs-lisp
   (setf backup-directory-alist '(("." . "~/.emacs-backup")))
