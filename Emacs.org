@@ -108,6 +108,8 @@ It's nice to have a time-machine.
   (leaf undo-tree
       :ensure t
       :require t
+      :custom ((undo-tree-history-directory-alist
+                . '(("." . "~/.undo-tree"))))
       :global-minor-mode global-undo-tree-mode)
 #+END_SRC
 ** eyebrowse
