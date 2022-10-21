@@ -15,7 +15,7 @@ Packages are to be manages by =leaf.el=.
     (unless (package-installed-p 'leaf)
       (package-refresh-contents)
       (package-install 'leaf))
-  
+
     (leaf leaf-keywords
       :ensure t
       :init
@@ -23,7 +23,7 @@ Packages are to be manages by =leaf.el=.
       :config
       ;; initialize leaf-keywords.el
       (leaf-keywords-init)))
-  
+
   (leaf leaf-tree :ensure t)
   (leaf leaf-convert :ensure t)
 #+END_SRC
@@ -87,47 +87,47 @@ Be evil.
       :ensure t
       :require t
       :global-minor-mode global-evil-surround-mode)
-      (evil-define-command evil-tab-sensitive-quit (&optional bang)
-        :repeat nil
-        (interactive "<!>")
-        (cond
-          ((> (length (window-list)) 1) (delete-window))
-          ((> (length (tab-bar-tabs)) 1) (tab-bar-close-tab))
-          (t (evil-quit bang))))
-      (evil-define-command evil-tab-sensitive-wq (&optional bang)
-        :repeat nil
-        (interactive "<!>")
-        (save-buffer)
-        (evil-tab-sensitive-quit bang))
-      (evil-ex-define-cmd "q[uit]" 'evil-tab-sensitive-quit)
-      (evil-ex-define-cmd "wq" 'evil-tab-sensitive-wq))
+    (evil-define-command evil-tab-sensitive-quit (&optional bang)
+      :repeat nil
+      (interactive "<!>")
+      (cond
+       ((> (length (window-list)) 1) (delete-window))
+       ((> (length (tab-bar-tabs)) 1) (tab-bar-close-tab))
+       (t (evil-quit bang))))
+    (evil-define-command evil-tab-sensitive-wq (&optional bang)
+      :repeat nil
+      (interactive "<!>")
+      (save-buffer)
+      (evil-tab-sensitive-quit bang))
+    (evil-ex-define-cmd "q[uit]" 'evil-tab-sensitive-quit)
+    (evil-ex-define-cmd "wq" 'evil-tab-sensitive-wq))
 #+END_SRC
 ** undo-tree
 It's nice to have a time-machine.
 #+BEGIN_SRC emacs-lisp
   (leaf undo-tree
-      :ensure t
-      :require t
-      :custom ((undo-tree-history-directory-alist
-                . '(("." . "~/.undo-tree"))))
-      :global-minor-mode global-undo-tree-mode)
+    :ensure t
+    :require t
+    :custom ((undo-tree-history-directory-alist
+              . '(("." . "~/.undo-tree"))))
+    :global-minor-mode global-undo-tree-mode)
 #+END_SRC
 ** tab-bar-mode
 #+begin_src emacs-lisp
   (leaf tab-bar
-      :tag builtin
-      :global-minor-mode tab-bar-mode
-      :custom ((tab-bar-show . 1)))
+    :tag builtin
+    :global-minor-mode tab-bar-mode
+    :custom ((tab-bar-show . 1)))
 #+end_src
 * Visual stuffs
 ** color theme
 ~(color-theme-sanityinc-tomorrow-eighties)~ doesn't prevent asking me "Are you sure?"
 #+BEGIN_SRC emacs-lisp
   (leaf color-theme-sanityinc-tomorrow
-      :ensure t
-      :require t
-      :config
-      (load-theme 'sanityinc-tomorrow-eighties t))
+    :ensure t
+    :require t
+    :config
+    (load-theme 'sanityinc-tomorrow-eighties t))
 #+END_SRC
 ** hide tool bar etc.
 #+BEGIN_SRC emacs-lisp
@@ -176,7 +176,7 @@ It's nice to have a time-machine.
             ("SPC h" . counsel-recentf)))
     :config
     (leaf ivy-hydra
-        :ensure t)
+      :ensure t)
     (defun swiper-isearch-save-direction (&optional initial-input)
       "swiper-isearch which saves its direction to isearch-forward"
       (interactive)
@@ -192,20 +192,20 @@ It's nice to have a time-machine.
 Emacs is too hard to live in without this.
 #+BEGIN_SRC emacs-lisp
   (leaf which-key
-      :ensure t
-      :global-minor-mode which-key-mode)
+    :ensure t
+    :global-minor-mode which-key-mode)
 #+END_SRC
 ** autorevert
 #+BEGIN_SRC emacs-lisp
   (leaf autorevert
-      :tag "builtin"
-      :global-minor-mode global-auto-revert-mode)
+    :tag "builtin"
+    :global-minor-mode global-auto-revert-mode)
 #+END_SRC
 ** recentf
 #+BEGIN_SRC emacs-lisp
   (leaf recentf
-      :tag "builtin"
-      :global-minor-mode recentf-mode)
+    :tag "builtin"
+    :global-minor-mode recentf-mode)
 #+END_SRC
 ** backups
 #+BEGIN_SRC emacs-lisp
@@ -216,11 +216,11 @@ Emacs is too hard to live in without this.
 - ~ls~ on macOS does not support ~ls --dired~.
 #+begin_src emacs-lisp
   (leaf dired
-      :tag "builtin"
-      :custom (dired-auto-revert-buffer . t)
-      :config
-      (when +on-silvershield+
-        (setq insert-directory-program "gls")))
+    :tag "builtin"
+    :custom (dired-auto-revert-buffer . t)
+    :config
+    (when +on-silvershield+
+      (setq insert-directory-program "gls")))
 #+end_src
 * General coding facilities
 ** lsp-mode
@@ -237,7 +237,7 @@ Emacs is too hard to live in without this.
       :require t
       :custom ((lsp-latex-build-on-save . t)))
     (leaf lsp-julia
-        :ensure t))
+      :ensure t))
 #+END_SRC
 ** company
 #+BEGIN_SRC emacs-lisp
@@ -249,63 +249,63 @@ Emacs is too hard to live in without this.
 ** flycheck
 #+BEGIN_SRC emacs-lisp
   (leaf flycheck
-      :ensure t
-      :global-minor-mode global-flycheck-mode)
+    :ensure t
+    :global-minor-mode global-flycheck-mode)
 #+END_SRC
 ** yasnippet
 #+BEGIN_SRC emacs-lisp
   (leaf yasnippet
-      :ensure t
-      :global-minor-mode yas-global-mode
-      :bind ((:yas-minor-mode-map ("C-c y" . yas-expand)))
-      :config
-      (leaf yasnippet-snippets
-          :ensure t))
+    :ensure t
+    :global-minor-mode yas-global-mode
+    :bind ((:yas-minor-mode-map ("C-c y" . yas-expand)))
+    :config
+    (leaf yasnippet-snippets
+      :ensure t))
 #+END_SRC
 ** TODO magit
 mysterious warning shows up.
 #+BEGIN_SRC emacs-lisp
   (leaf magit
-      :ensure t
-      :bind ((:evil-motion-state-map
-              :package evil
-              ("SPC g" . magit-status))))
+    :ensure t
+    :bind ((:evil-motion-state-map
+            :package evil
+            ("SPC g" . magit-status))))
 #+END_SRC
 ** vterm
 #+BEGIN_SRC emacs-lisp
   (leaf vterm
+    :ensure t
+    :after evil-collection
+    :bind ((:evil-motion-state-map
+            :package evil
+            ("SPC r" . vterm-repl)))
+    :config
+    (defun vterm-repl (command)
+      (interactive "sREPL command: ")
+      (let ((vterm-shell command))
+        (multi-vterm)))
+    (leaf multi-vterm
       :ensure t
-      :after evil-collection
-      :bind ((:evil-motion-state-map
-              :package evil
-              ("SPC r" . vterm-repl)))
-      :config
-      (defun vterm-repl (command)
-        (interactive "sREPL command: ")
-        (let ((vterm-shell command))
-          (multi-vterm)))
-      (leaf multi-vterm
-          :ensure t
-          :bind (:evil-motion-state-map
-                 :package evil
-                 ("SPC t" . multi-vterm))))
+      :bind (:evil-motion-state-map
+             :package evil
+             ("SPC t" . multi-vterm))))
 #+END_SRC
 ** parentheses
 #+BEGIN_SRC emacs-lisp
   (leaf paren
-      :tag "builtin"
-      :custom ((show-paren-delay . 0))
-      :global-minor-mode show-paren-mode)
+    :tag "builtin"
+    :custom ((show-paren-delay . 0))
+    :global-minor-mode show-paren-mode)
 
   (leaf elec-pair
-      :tag "builtin"
-      :global-minor-mode electric-pair-mode)
+    :tag "builtin"
+    :global-minor-mode electric-pair-mode)
 #+END_SRC
 ** display-line-numbers
 #+BEGIN_SRC emacs-lisp
   (leaf display-line-numbers
-      :tag "builtin"
-      :global-minor-mode global-display-line-numbers-mode)
+    :tag "builtin"
+    :global-minor-mode global-display-line-numbers-mode)
 #+END_SRC
 ** disable indent-tabs-mode
 No tabs, please.
@@ -318,131 +318,127 @@ How many of them do I use?
 As far as I tried so far =ob-julia-vterm= seems to be the best Julia-Babel integration package.
 #+BEGIN_SRC emacs-lisp
   (leaf julia-mode
+    :ensure t
+    :config
+    (leaf julia-vterm
       :ensure t
-      :config
-      (leaf julia-vterm
-          :ensure t
-          :hook (julia-mode-hook . julia-vterm-mode))
-      (leaf ob-julia-vterm
-          :el-get (ob-julia-vterm
-                   :url "https://github.com/shg/ob-julia-vterm.el.git")
-          :after julia-vterm))
+      :hook (julia-mode-hook . julia-vterm-mode))
+    (leaf ob-julia-vterm
+      :el-get (ob-julia-vterm
+               :url "https://github.com/shg/ob-julia-vterm.el.git")
+      :after julia-vterm))
 #+END_SRC
 ** Python
 *** Python mode
 #+BEGIN_SRC emacs-lisp
   (leaf python
-      :tag "builtin"
-      :custom ((python-shell-interpreter . "python3")))
+    :tag "builtin"
+    :custom ((python-shell-interpreter . "python3")))
 #+END_SRC
 *** Jupyter notebook
 #+BEGIN_SRC emacs-lisp
   (leaf ein
-      :ensure t
-      :if nil
-      :custom ((ein:output-area-inlined-images . t)))
+    :ensure t
+    :if nil
+    :custom ((ein:output-area-inlined-images . t)))
 
   (leaf jupyter
-      :ensure t)
+    :ensure t)
 #+END_SRC
 ** Go
 #+begin_src emacs-lisp
   (leaf go-mode
-      :ensure t)
+    :ensure t)
 #+end_src
 ** Fish
 Although there is some support in ~sh-mode~, it does not behave well overall.
 #+begin_src emacs-lisp
   (leaf fish-mode
-      :ensure t)
+    :ensure t)
 #+end_src
 ** Lisps
 *** paredit
 #+BEGIN_SRC emacs-lisp
   (leaf paredit
-      :ensure t
-      :hook ((lisp-mode-hook
-              emacs-lisp-mode-hook
-              ielm-mode-hook
-              hy-mode-hook
-              scheme-mode-hook)
-             . enable-paredit-mode))
-#+END_SRC
-*** Emacs Lisp
-#+BEGIN_SRC emacs-lisp
-  (setf lisp-indent-function 'common-lisp-indent-function)
+    :ensure t
+    :hook ((lisp-mode-hook
+            emacs-lisp-mode-hook
+            ielm-mode-hook
+            hy-mode-hook
+            scheme-mode-hook)
+           . enable-paredit-mode))
 #+END_SRC
 *** Scheme
 #+begin_src emacs-lisp
   (leaf geiser
-      :ensure t
-      :custom ((geiser-default-implementation . 'guile))
-      :config
-      (leaf geiser-guile
-          :ensure t)
-      (leaf geiser-gauche
-          :ensure t)
-      (leaf geiser-kawa
-          :ensure t)
-      (leaf geiser-chicken
-          :ensure t))
+    :ensure t
+    :custom ((geiser-default-implementation . 'guile))
+    :config
+    (leaf geiser-guile
+      :ensure t)
+    (leaf geiser-gauche
+      :ensure t)
+    (leaf geiser-kawa
+      :ensure t)
+    (leaf geiser-chicken
+      :ensure t))
 #+end_src
 ** Asymptote
 #+BEGIN_SRC emacs-lisp
   (leaf asy-mode
-      :if +on-silvershield+
-      :load-path "/usr/local/texlive/2020/texmf-dist/asymptote/"
-      :commands (asy-mode lasy-mode asy-insinuate-latex)
-      :config
-      (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
+    :if +on-silvershield+
+    :load-path "/usr/local/texlive/2020/texmf-dist/asymptote/"
+    :commands (asy-mode lasy-mode asy-insinuate-latex)
+    :config
+    (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
 #+END_SRC
 ** TODO gnuplot
 There seems to be some problems.
 I'll face it when the time comes.
 #+BEGIN_SRC emacs-lisp
   (leaf gnuplot
-      :ensure t
-      :commands (gnuplot-mode gnuplot-make-buffer)
-      :init
-      (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode)))
+    :ensure t
+    :commands (gnuplot-mode gnuplot-make-buffer)
+    :init
+    (add-to-list 'auto-mode-alist '("\\.gp$" . gnuplot-mode)))
 #+END_SRC
 ** LaTeX
 #+BEGIN_SRC emacs-lisp
   (leaf auctex
-      :ensure t
-      :hook ((LaTeX-mode-hook . LaTeX-math-mode))
-      :custom ((japanese-TeX-engine-default . 'luatex)
-               (TeX-default-mode . 'japanese-latex-mode)
-               (japanese-LaTeX-default-style . "ltjsarticle")))
+    :ensure t
+    :hook ((LaTeX-mode-hook . LaTeX-math-mode))
+    :custom ((japanese-TeX-engine-default . 'luatex)
+             (TeX-default-mode . 'japanese-latex-mode)
+             (japanese-LaTeX-default-style . "ltjsarticle")))
 #+END_SRC
 ** Haskell
 #+BEGIN_SRC emacs-lisp
   (leaf haskell-mode
+    :ensure t
+    :config
+    (leaf lsp-haskell
       :ensure t
-      :config
-      (leaf lsp-haskell
-          :ensure t
-          :after lsp-mode))
+      :after lsp-mode))
 #+END_SRC
 * Org
 Let's org'anize everything.
 #+BEGIN_SRC emacs-lisp
   (leaf org
-      :tag "builtin"
-      :after yasnippet company
-      :custom ((org-agenda-files . "~/.emacs.d/org-agenda")
-               (org-startup-truncated . nil)
-               (org-startup-indented . t)
-               (org-image-actual-width . 500)
-               (org-latex-compiler . "lualatex")
-               (org-latex-pdf-process . '("latexmk -output-directory=%o %f"))
-               (org-latex-packages-alist . '(("" "luatexja-fontspec" nil '("lualatex"))))
-               (org-latex-default-class . "ltjsarticle")
-               (org-latex-prefer-user-labels . t)
-               (org-babel-python-command . "python3")
-               (org-ditaa-jar-path . "/usr/local/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
-               (org-confirm-babel-evaluate . nil)
-               (org-format-latex-header . "\\documentclass[ja=standard]{bxjsarticle}
+    :tag "builtin"
+    :after yasnippet company
+    :custom ((org-agenda-files . "~/.emacs.d/org-agenda")
+             (org-startup-truncated . nil)
+             (org-startup-indented . t)
+             (org-image-actual-width . 500)
+             (org-latex-compiler . "lualatex")
+             (org-latex-pdf-process . '("latexmk -output-directory=%o %f"))
+             (org-latex-packages-alist . '(("" "luatexja-fontspec" nil '("lualatex"))))
+             (org-latex-default-class . "ltjsarticle")
+             (org-latex-prefer-user-labels . t)
+             (org-babel-python-command . "python3")
+             (org-ditaa-jar-path . "/usr/local/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
+             (org-confirm-babel-evaluate . nil)
+             (org-format-latex-header . "\\documentclass[ja=standard]{bxjsarticle}
   \\usepackage[usenames]{color}
   [PACKAGES]
   [DEFAULT-PACKAGES]
@@ -461,71 +457,71 @@ Let's org'anize everything.
   \\addtolength{\\textheight}{-3cm}
   \\setlength{\\topmargin}{1.5cm}
   \\addtolength{\\topmargin}{-2.54cm}")
-               (org-format-latex-options . '(:foreground "White"
-                                             :background default
-                                             :scale 1.5
-                                             :html-foreground "Black"
-                                             :html-background "Transparent"
-                                             :html-scale 1.0
-                                             :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
-               (org-latex-listings . t)
-               (org-latex-listings-options .
-                                           '(("basicstyle"  "\\fontspec{RictyDiminished-Discord}")
-                                             ("keywordstyle" "{\\fontspec{RictyDiminishedDiscord-Bold}[Color=blue]}")
-                                             ("commentstyle" "{\\fontspec{RictyDiminishedDiscord-Oblique}[Color=green]}")
-                                             ("stringstyle" "\\color{orange}")
-                                             ("postbreak" "↳\\space")
-                                             ("frame" "single")
-                                             ("breaklines" "true"))))
-      :hook (org-mode-hook . (lambda ()
-                               (set (make-local-variable 'company-backends) '((company-dabbrev company-yasnippet)))))
-      :bind (:evil-motion-state-map
-             :package evil
-             ("SPC a" . org-agenda))
+             (org-format-latex-options . '(:foreground "White"
+                                                       :background default
+                                                       :scale 1.5
+                                                       :html-foreground "Black"
+                                                       :html-background "Transparent"
+                                                       :html-scale 1.0
+                                                       :matchers ("begin" "$1" "$" "$$" "\\(" "\\[")))
+             (org-latex-listings . t)
+             (org-latex-listings-options .
+                                         '(("basicstyle"  "\\fontspec{RictyDiminished-Discord}")
+                                           ("keywordstyle" "{\\fontspec{RictyDiminishedDiscord-Bold}[Color=blue]}")
+                                           ("commentstyle" "{\\fontspec{RictyDiminishedDiscord-Oblique}[Color=green]}")
+                                           ("stringstyle" "\\color{orange}")
+                                           ("postbreak" "↳\\space")
+                                           ("frame" "single")
+                                           ("breaklines" "true"))))
+    :hook (org-mode-hook . (lambda ()
+                             (set (make-local-variable 'company-backends) '((company-dabbrev company-yasnippet)))))
+    :bind (:evil-motion-state-map
+           :package evil
+           ("SPC a" . org-agenda))
+    :config
+    (with-eval-after-load 'ox-latex
+      (add-to-list 'org-latex-classes '("ltjsarticle" "\\documentclass[11pt]{ltjsarticle}"
+                                        ("\\section{%s}" . "\\section*{%s}")
+                                        ("\\subsection{%s}" . "\\subsection*{%s}")
+                                        ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                        ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                        ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+    (org-babel-do-load-languages 'org-babel-load-languages
+                                 '((emacs-lisp . t)
+                                   (python . t)
+                                   (gnuplot . t)
+                                   (shell . t)
+                                   (scheme . t)
+                                   (julia-vterm . t)
+                                   (jupyter . t)
+                                   (asymptote . t)))
+    (leaf org-contrib
+      :ensure t
+      :require ox-extra
       :config
-      (with-eval-after-load 'ox-latex
-        (add-to-list 'org-latex-classes '("ltjsarticle" "\\documentclass[11pt]{ltjsarticle}"
-                                          ("\\section{%s}" . "\\section*{%s}")
-                                          ("\\subsection{%s}" . "\\subsection*{%s}")
-                                          ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                                          ("\\paragraph{%s}" . "\\paragraph*{%s}")
-                                          ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
-      (org-babel-do-load-languages 'org-babel-load-languages
-                                   '((emacs-lisp . t)
-                                     (python . t)
-                                     (gnuplot . t)
-                                     (shell . t)
-                                     (scheme . t)
-                                     (julia-vterm . t)
-                                     (jupyter . t)
-                                     (asymptote . t)))
-      (leaf org-contrib
-          :ensure t
-          :require ox-extra
-          :config
-          (ox-extras-activate '(ignore-headlines)))
-      (leaf ox-latex-subfigure
-          :el-get (ox-latex-subfigure
-                   :url "https://github.com/KPCCoiL/ox-latex-subfigure.git"
-                   :branch "center-subfigure")
-          :require t
-          :after org)
-      (leaf org-ref
-          :ensure t
-          :require t
-          :after org
-          :pre-setq (org-ref-completion-library . 'org-ref-ivy-cite)
-          :custom ((reftex-default-bibliography . '("~/Documents/bibliography/references.bib"))
-                   (org-ref-bibliography-notes . "~/Documents/bibliography/bibliography-notes.org")
-                   (org-ref-pdf-directory . "~/Documents/bibliography/bibtex-pdfs"))))
+      (ox-extras-activate '(ignore-headlines)))
+    (leaf ox-latex-subfigure
+      :el-get (ox-latex-subfigure
+               :url "https://github.com/KPCCoiL/ox-latex-subfigure.git"
+               :branch "center-subfigure")
+      :require t
+      :after org)
+    (leaf org-ref
+      :ensure t
+      :require t
+      :after org
+      :pre-setq (org-ref-completion-library . 'org-ref-ivy-cite)
+      :custom ((reftex-default-bibliography . '("~/Documents/bibliography/references.bib"))
+               (org-ref-bibliography-notes . "~/Documents/bibliography/bibliography-notes.org")
+               (org-ref-pdf-directory . "~/Documents/bibliography/bibtex-pdfs"))))
 #+END_SRC
 * Miscellaneous utilities
 ** doc-view
 #+BEGIN_SRC emacs-lisp
   (leaf doc-view
-      :tag "builtin"
-      :custom ((doc-view-continuous . t))
-      :hook (doc-view-mode-hook . auto-revert-mode))
+    :tag "builtin"
+    :custom ((doc-view-continuous . t))
+    :hook (doc-view-mode-hook . auto-revert-mode))
 #+END_SRC
 * others
 ** edit this file quickly
