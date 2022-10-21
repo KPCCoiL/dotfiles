@@ -524,8 +524,7 @@ Let's org'anize everything.
 #+BEGIN_SRC emacs-lisp
   (leaf doc-view
       :tag "builtin"
-      :custom ((doc-view-ghostscript-program . "gs-noX11-Yosemite")
-               (doc-view-continuous . t))
+      :custom ((doc-view-continuous . t))
       :hook (doc-view-mode-hook . auto-revert-mode))
 #+END_SRC
 * others
