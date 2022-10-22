@@ -120,7 +120,11 @@ It's nice to have a time-machine.
   (leaf tab-bar
     :tag builtin
     :global-minor-mode tab-bar-mode
-    :custom ((tab-bar-show . 1)))
+    :custom ((tab-bar-show . 1)
+             (tab-bar-new-tab-choice . "*scratch*"))
+    :bind ((:evil-motion-state-map
+            ("SPC W" . tab-bar-new-tab)
+            ("SPC w" . tab-bar-select-tab))))
 #+end_src
 * Visual stuffs
 ** color theme
