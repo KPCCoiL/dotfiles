@@ -431,7 +431,8 @@ Let's org'anize everything.
              (org-babel-python-command . "python3")
              (org-ditaa-jar-path . "/usr/local/Cellar/ditaa/0.11.0_1/libexec/ditaa-0.11.0-standalone.jar")
              (org-confirm-babel-evaluate . nil)
-             (org-format-latex-header . "\\documentclass[ja=standard]{bxjsarticle}
+             (org-format-latex-header . "
+  \\documentclass[ja=standard]{bxjsarticle}
   \\usepackage[usenames]{color}
   [PACKAGES]
   [DEFAULT-PACKAGES]
@@ -449,7 +450,9 @@ Let's org'anize everything.
   \\addtolength{\\textheight}{-\\footskip}
   \\addtolength{\\textheight}{-3cm}
   \\setlength{\\topmargin}{1.5cm}
-  \\addtolength{\\topmargin}{-2.54cm}")
+  \\addtolength{\\topmargin}{-2.54cm}
+  "
+                                      )
              (org-format-latex-options . '(:foreground "White"
                                                        :background default
                                                        :scale 1.5
