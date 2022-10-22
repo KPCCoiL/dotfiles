@@ -265,8 +265,7 @@ Emacs is too hard to live in without this.
     (leaf yasnippet-snippets
       :ensure t))
 #+END_SRC
-** TODO magit
-mysterious warning shows up.
+** magit
 #+BEGIN_SRC emacs-lisp
   (leaf magit
     :ensure t
