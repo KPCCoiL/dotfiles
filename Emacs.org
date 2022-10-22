@@ -40,7 +40,10 @@ Perhaps this is a bad habit.
 * Tiny utilities
 Utilities for configurations.
 #+BEGIN_SRC emacs-lisp
-  (defconst +on-silvershield+ (string= (system-name) "SilverShield"))
+  (defconst +on-internalblaze+ (string= (system-name) "internalblaze"))
+  (defmacro device-case (&rest cases)
+    `(pcase (system-name)
+       ,@cases))
 #+END_SRC
 
 * Evil
@@ -133,24 +136,24 @@ It's nice to have a time-machine.
 #+BEGIN_SRC emacs-lisp
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
-  (when +on-silvershield+
+  (when +on-internalblaze+
     (menu-bar-mode -1))
   (setf inhibit-startup-screen t)
 #+END_SRC
 ** frame size
 #+BEGIN_SRC emacs-lisp
   (setf default-frame-alist
-        (pcase (system-name)
-          ("StellarDagger" '((width . 125)
-                             (height . 35)
-                             (left . 200)
-                             (top . 30)
-                             (font . "Ricty Diminished Discord 14")))
-          ("SilverShield" '((width . 125)
-                            (height . 60)
-                            (left . 500)
-                            (top . 50)
-                            (font . "Menlo 14")))))
+        (device-case
+         ("StellarDagger" '((width . 125)
+                            (height . 35)
+                            (left . 200)
+                            (top . 30)
+                            (font . "Ricty Diminished Discord 14")))
+         ("InternalBlaze" '((width . 125)
+                           (height . 40)
+                           (left . 220)
+                           (top . 50)
+                           (font . "Menlo 14")))))
 #+END_SRC
 * General utilities
 ** hydra
@@ -219,7 +222,7 @@ Emacs is too hard to live in without this.
     :tag "builtin"
     :custom (dired-auto-revert-buffer . t)
     :config
-    (when +on-silvershield+
+    (when +on-internalblaze+
       (setq insert-directory-program "gls")))
 #+end_src
 * General coding facilities
@@ -383,15 +386,6 @@ Although there is some support in ~sh-mode~, it does not behave well overall.
     (leaf geiser-chicken
       :ensure t))
 #+end_src
-** Asymptote
-#+BEGIN_SRC emacs-lisp
-  (leaf asy-mode
-    :if +on-silvershield+
-    :load-path "/usr/local/texlive/2020/texmf-dist/asymptote/"
-    :commands (asy-mode lasy-mode asy-insinuate-latex)
-    :config
-    (add-to-list 'auto-mode-alist '("\\.asy$" . asy-mode)))
-#+END_SRC
 ** TODO gnuplot
 There seems to be some problems.
 I'll face it when the time comes.
@@ -493,8 +487,7 @@ Let's org'anize everything.
                                    (shell . t)
                                    (scheme . t)
                                    (julia-vterm . t)
-                                   (jupyter . t)
-                                   (asymptote . t)))
+                                   (jupyter . t)))
     (leaf org-contrib
       :ensure t
       :require ox-extra
