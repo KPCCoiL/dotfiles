@@ -1,4 +1,4 @@
-;;; init.el -- exactly it sounds
+;;; init.el -- exactly what it looks like
 
 ;;; Commentary:
 ;; This just loads elisps from org files.
