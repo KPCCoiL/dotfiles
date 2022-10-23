@@ -294,7 +294,13 @@ Emacs is too hard to live in without this.
       :ensure t
       :bind (:evil-motion-state-map
              :package evil
-             ("SPC t" . multi-vterm))))
+             ("SPC t" . multi-vterm)
+             ("SPC T" . multi-vterm-in-new-tab))
+      :config
+      (defun multi-vterm-in-new-tab ()
+        (interactive)
+        (tab-bar-new-tab)
+        (multi-vterm))))
 #+END_SRC
 ** parentheses
 #+BEGIN_SRC emacs-lisp
