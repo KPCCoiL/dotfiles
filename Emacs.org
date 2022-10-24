@@ -239,6 +239,84 @@ Emacs is too hard to live in without this.
     (leaf lsp-ui
       :ensure t))
 #+END_SRC
+** company
+#+BEGIN_SRC emacs-lisp
+  (leaf company
+    :ensure t
+    :custom ((company-idle-delay . 0))
+    :global-minor-mode global-company-mode)
+#+END_SRC
+** flycheck
+#+BEGIN_SRC emacs-lisp
+  (leaf flycheck
+    :ensure t
+    :global-minor-mode global-flycheck-mode)
+#+END_SRC
+** yasnippet
+#+BEGIN_SRC emacs-lisp
+  (leaf yasnippet
+    :ensure t
+    :global-minor-mode yas-global-mode
+    :bind ((:yas-minor-mode-map ("C-c y" . yas-expand)))
+    :config
+    (leaf yasnippet-snippets
+      :ensure t))
+#+END_SRC
+** magit
+#+BEGIN_SRC emacs-lisp
+  (leaf magit
+    :ensure t
+    :bind ((:evil-motion-state-map
+            :package evil
+            ("SPC g" . magit-status))))
+#+END_SRC
+** vterm
+#+BEGIN_SRC emacs-lisp
+  (leaf vterm
+    :ensure t
+    :after evil-collection
+    :bind ((:evil-motion-state-map
+            :package evil
+            ("SPC r" . vterm-repl)))
+    :config
+    (defun vterm-repl (command)
+      (interactive "sREPL command: ")
+      (let ((vterm-shell command))
+        (multi-vterm)))
+    (leaf multi-vterm
+      :ensure t
+      :bind (:evil-motion-state-map
+             :package evil
+             ("SPC t" . multi-vterm)
+             ("SPC T" . multi-vterm-in-new-tab))
+      :config
+      (defun multi-vterm-in-new-tab ()
+        (interactive)
+        (tab-bar-new-tab)
+        (multi-vterm))))
+#+END_SRC
+** parentheses
+#+BEGIN_SRC emacs-lisp
+  (leaf paren
+    :tag "builtin"
+    :custom ((show-paren-delay . 0))
+    :global-minor-mode show-paren-mode)
+
+  (leaf elec-pair
+    :tag "builtin"
+    :global-minor-mode electric-pair-mode)
+#+END_SRC
+** display-line-numbers
+#+BEGIN_SRC emacs-lisp
+  (leaf display-line-numbers
+    :tag "builtin"
+    :global-minor-mode global-display-line-numbers-mode)
+#+END_SRC
+** disable indent-tabs-mode
+No tabs, please.
+#+BEGIN_SRC emacs-lisp
+  (setq-default indent-tabs-mode nil)
+#+END_SRC
 * Language supports
 How many of them do I use?
 ** C, C++
