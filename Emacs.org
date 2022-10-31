@@ -40,10 +40,18 @@ Perhaps this is a bad habit.
 * Tiny utilities
 Utilities for configurations.
 #+BEGIN_SRC emacs-lisp
-  (defconst +on-internalblaze+ (string= (system-name) "internalblaze"))
+  (defun is-the-device (device-name)
+    (string-prefix-p device-name (system-name) t))
+
+  (defconst +on-internalblaze+
+    (is-the-device "internalblaze"))
+
   (defmacro device-case (&rest cases)
-    `(pcase (system-name)
-       ,@cases))
+    `(cond
+      ,@(mapcar (lambda (l)
+                  `((is-the-device ,(car l))
+                    ,@(cdr l)))
+                cases)))
 #+END_SRC
 
 * Evil
@@ -438,6 +446,12 @@ I'll face it when the time comes.
       :ensure t
       :after lsp-mode))
 #+END_SRC
+** OCaml
+#+begin_src emacs-lisp
+  (leaf tuareg
+    :ensure t
+    :hook (tuareg-mode-hook . lsp))
+#+end_src
 * Org
 Let's org'anize everything.
 #+BEGIN_SRC emacs-lisp
