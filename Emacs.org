@@ -40,8 +40,14 @@ Perhaps this is a bad habit.
 * Tiny utilities
 Utilities for configurations.
 #+BEGIN_SRC emacs-lisp
+  (require 'f)
+  (require 's)
+  (require 'cl-lib)
+
   (defun is-the-device (device-name)
-    (string-prefix-p device-name (system-name) t))
+    (cl-equalp
+     (s-trim (f-read "~/.machine-name"))
+     device-name))
 
   (defconst +on-internalblaze+
     (is-the-device "internalblaze"))
@@ -557,6 +563,19 @@ Let's org'anize everything.
     :custom ((doc-view-continuous . t))
     :hook (doc-view-mode-hook . auto-revert-mode))
 #+END_SRC
+** pdf-tools
+#+begin_src emacs-lisp
+  (leaf pdf-tools
+    :ensure t
+    :require t
+    :custom (pdf-view-use-scaling . t)
+    :hook (pdf-view-mode-hook
+           . (lambda ()
+               (display-line-numbers-mode -1)
+               (auto-revert-mode -1)))
+    :config
+    (pdf-tools-install))
+#+end_src
 * others
 ** edit this file quickly
 #+BEGIN_SRC emacs-lisp
