@@ -40,8 +40,14 @@ Perhaps this is a bad habit.
 * Tiny utilities
 Utilities for configurations.
 #+BEGIN_SRC emacs-lisp
+  (require 'f)
+  (require 's)
+  (require 'cl-lib)
+
   (defun is-the-device (device-name)
-    (string-prefix-p device-name (system-name) t))
+    (cl-equalp
+     (s-trim (f-read "~/.machine-name"))
+     device-name))
 
   (defconst +on-internalblaze+
     (is-the-device "internalblaze"))
