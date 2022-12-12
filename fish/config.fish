@@ -1,12 +1,15 @@
 switch (uname)
 case Darwin
-  set -gx CAML_LD_LIBRARY_PATH "/Users/akifumi/.opam/system/lib/stublibs:/usr/local/lib/ocaml/stublibs";
-  set -gx OPAMUTF8MSGS "1";
-  set -gx MANPATH "/Users/akifumi/.opam/system/man" "";
-  set -gx PERL5LIB "/Users/akifumi/.opam/system/lib/perl5";
-  set -gx OCAML_TOPLEVEL_PATH "/Users/akifumi/.opam/system/lib/toplevel";
+  # set -gx CAML_LD_LIBRARY_PATH "/Users/akifumi/.opam/system/lib/stublibs:/usr/local/lib/ocaml/stublibs";
+  # set -gx OPAMUTF8MSGS "1";
+  # set -gx MANPATH "/Users/akifumi/.opam/system/man" "";
+  # set -gx PERL5LIB "/Users/akifumi/.opam/system/lib/perl5";
+  # set -gx OCAML_TOPLEVEL_PATH "/Users/akifumi/.opam/system/lib/toplevel";
   set -x LSCOLORS "gxfxcxdxbxegedabagacad"
   source ~/.iterm2_shell_integration.fish
+
+  # opam configuration
+  source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 end
 
 alias eit=exit
