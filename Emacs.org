@@ -551,9 +551,9 @@ Let's org'anize everything.
       :require t
       :after org
       :pre-setq (org-ref-completion-library . 'org-ref-ivy-cite)
-      :custom ((reftex-default-bibliography . '("~/Documents/bibliography/references.bib"))
-               (org-ref-bibliography-notes . "~/Documents/bibliography/bibliography-notes.org")
-               (org-ref-pdf-directory . "~/Documents/bibliography/bibtex-pdfs"))))
+      :custom ((bibtex-completion-bibliography . '("~/Documents/bibliography/references.bib"))
+               (bibtex-completion-notes-path . "~/Documents/bibliography/bibliography-notes.org")
+               (bibtex-completion-library-path . '("~/Documents/bibliography/bibtex-pdfs")))))
 #+END_SRC
 * Miscellaneous utilities
 ** doc-view
