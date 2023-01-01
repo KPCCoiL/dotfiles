@@ -514,6 +514,7 @@ Let's org'anize everything.
                                            ("postbreak" "↳\\space")
                                            ("frame" "single")
                                            ("breaklines" "true"))))
+    :custom `(org-cite-global-bibliography . '(,(expand-file-name "~/MEGA/bibliography/references.bib")))
     :hook (org-mode-hook . (lambda ()
                              (set (make-local-variable 'company-backends) '((company-dabbrev company-yasnippet)))))
     :bind (:evil-motion-state-map
