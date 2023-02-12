@@ -1,0 +1,18 @@
+export EDITOR=vise
+export GUILE_LOAD_COMPILED_PATH=/opt/homebrew/lib/guile/3.0/site-ccache
+export GUILE_LOAD_PATH=/opt/homebrew/share/guile/site/3.0
+export GUILE_SYSTEM_EXTENSIONS_PATH=/opt/homebrew/lib/guile/3.0/extensions
+export PATH="$HOME/.opam/default/bin:$HOME/.pyenv/shims:$HOME/Documents/programs/environments/scheme-packages/guile-local/bin:$HOME/.pyenv/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.ghcup/bin:$HOME/.cargo/bin:$HOME/Library/Python/3.9/bin:$HOME/.local/bin:$PATH"
+export PATH="$(brew --prefix)/opt/gnu-indent/libexec/gnubin:$PATH"
+export PYENV_ROOT=/Users/akifumi/.pyenv
+
+if type brew &>/dev/null; then
+	HOMEBREW_PREFIX="$(brew --prefix)"
+	if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+		source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+	else
+		for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+			[[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+		done
+	fi
+fi
