@@ -11,11 +11,11 @@ alias ll='ls -la'
 set_bash_prompt () {
     local last_status="$?"
     if [[ $last_status -eq 0 ]]; then
-        local status="\e[1;32m"
+        local status="\[\e[1;32m\]"
     else
-        local status="\e[1;31m$last_status "
+        local status="\[\e[1;31m\]$last_status "
     fi
-    PS1="${status}→ \e[1;36m\W \e[0m"
+    PS1="${status}→ \[\e[1;36m\]\W \[\e[0m\]"
 }
 
 export PROMPT_COMMAND=set_bash_prompt
