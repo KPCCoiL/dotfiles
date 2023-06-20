@@ -47,7 +47,7 @@ end)
 vis.events.subscribe(vis.events.WIN_OPEN, function(win)
     setOption("number")
     local indents = {
-        ansi_c = "tab8", go = "tab4",
+        ansi_c = "tab8", makefile = "tab8", go = "tab4",
     }
     indent = indents[win.syntax]
     if indent and indent:sub(1, 3) == "tab" then
